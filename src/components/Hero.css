@@ -124,6 +124,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  gap: 30px;
 }
 
 .hero__title {
@@ -135,6 +136,9 @@
   letter-spacing: 0.05em;
   text-transform: uppercase;
   z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .hero__title-line {
@@ -152,19 +156,19 @@
 
 /* LOGO WRAPPER */
 .hero__logo-wrapper {
-  margin: -2vh 0 -5vh;
-  /* Negative margins to make title visually overlap the empty space built into the image */
-  height: clamp(250px, 35vh, 450px);
+  width: clamp(280px, 50vw, 750px);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   z-index: 2;
+  padding: 20px;
+  /* Padding for the shadow/glow effect so it doesn't get clipped by bounds if any exist */
 }
 
 .hero__main-logo {
-  height: 100%;
-  width: auto;
+  width: 100%;
+  height: auto;
   object-fit: contain;
   filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.6));
   animation: levitate 5s ease-in-out infinite, gentleGlow 4s ease-in-out infinite alternate;

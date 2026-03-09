@@ -14,42 +14,17 @@ export default function Hero() {
         </div>
 
         <h1 className="hero__title">
-          WELCOME TO<br />
-          <span className="hero__title-highlight">CRAFTY VIRTUAL COUTURE</span>
+          <span className="hero__title-line">WELCOME TO CRAFTY</span>
         </h1>
 
         <div className="hero__center-showcase">
-          <div className="hero__blob">
-            <div className="hero__blob-inner">
-              <img src={craftyLogo} alt="Crafty" className="hero__center-logo" />
-              <div className="hero__event-text">
-                <span className="hero__event-time">SATURDAY 09 AM SLT</span>
-                <span className="hero__event-price">
-                  50L-<br />100L
-                </span>
-              </div>
-            </div>
+          <div className="hero__logo-wrapper">
+            <img src={craftyLogo} alt="Crafty Logo" className="hero__main-logo" />
           </div>
 
-          {/* Floating elements similar to reference */}
-          <div className="hero__floating-feature hero__floating-feature--left">
-            <span className="hero__floating-text">50-100L</span>
-          </div>
-
-          <div className="hero__floating-feature hero__floating-feature--right">
-            <span className="hero__floating-text">SALES EVENT</span>
-          </div>
-
-          <div className="hero__info-list">
-            <div className="hero__info-item">
-              <span className="hero__info-icon">+</span>
-              <span>Powered by CRAFTY Event</span>
-            </div>
-            <div className="hero__info-item">
-              <span className="hero__info-icon">+</span>
-              <span>Every Saturday</span>
-            </div>
-          </div>
+          <h1 className="hero__title">
+            <span className="hero__title-highlight">WEEKEND SALES</span>
+          </h1>
         </div>
 
         <div className="hero__scroll-indicator">
