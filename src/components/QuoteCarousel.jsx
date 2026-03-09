@@ -5,83 +5,57 @@ const quotes = [
   {
     text: "Monthly Event · The Arcade · Collabor88 · Fameshed",
     sub: "Los mejores eventos te esperan",
+    id: 1,
+    text: "La moda en Second Life no es solo vestirse, es proyectar quien realmente quieres ser sin las limitaciones del mundo físico.",
+    author: "Vogue Virtual"
   },
   {
-    text: "La moda es arte. Tu avatar, el lienzo.",
-    sub: "Crafty — Virtual Fashion House",
+    id: 2,
+    text: "Crafty ha elevado el estándar de lo que consideramos alta costura digital. Sus texturas son inigualables.",
+    author: "SL Style Magazine"
   },
   {
-    text: "Gatcha · Fantasy Faire · SaNaRae · Anthem",
-    sub: "Coleccionables exclusivos cada temporada",
-  },
-  {
-    text: "Viste tu identidad digital con clase y originalidad.",
-    sub: "Crafty — Hecho con amor en Second Life",
-  },
-  {
-    text: "Midnight Order · Kustom9 · Equal10 · Salem",
-    sub: "Eventos de moda que marcan tendencia",
-  },
-  {
-    text: "Cada pixel cuenta. Cada look, una historia.",
-    sub: "Crafty — Where Style Meets the Metaverse",
-  },
+    id: 3,
+    text: "Vestir un diseño de Crafty es experimentar el lujo en su estado más puro e inmaterial.",
+    author: "Avatar Chic"
+  }
 ];
 
 export default function QuoteCarousel() {
-  const [current, setCurrent] = useState(0);
-  const [animating, setAnimating] = useState(false);
-  const intervalRef = useRef(null);
-
-  const goTo = (index) => {
-    if (animating) return;
-    setAnimating(true);
-    setTimeout(() => {
-      setCurrent(index);
-      setAnimating(false);
-    }, 400);
-  };
-
-  const next = () => goTo((current + 1) % quotes.length);
-  const prev = () => goTo((current - 1 + quotes.length) % quotes.length);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    intervalRef.current = setInterval(next, 4500);
-    return () => clearInterval(intervalRef.current);
-  }, [current]);
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % quotes.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const nextQuote = () => setCurrentIndex((prev) => (prev + 1) % quotes.length);
+  const prevQuote = () => setCurrentIndex((prev) => (prev === 0 ? quotes.length - 1 : prev - 1));
 
   return (
-    <section className="qcarousel" id="nosotros">
-      <div className="qcarousel__inner">
-        <div className="qcarousel__track">
-          <button className="qcarousel__arrow qcarousel__arrow--prev" onClick={prev} aria-label="Anterior">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M15 18l-6-6 6-6"/>
-            </svg>
-          </button>
-
-          <div className={`qcarousel__content ${animating ? 'qcarousel__content--out' : 'qcarousel__content--in'}`}>
-            <div className="qcarousel__quote-icon">"</div>
-            <p className="qcarousel__text">{quotes[current].text}</p>
-            <span className="qcarousel__sub">{quotes[current].sub}</span>
-          </div>
-
-          <button className="qcarousel__arrow qcarousel__arrow--next" onClick={next} aria-label="Siguiente">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M9 18l6-6-6-6"/>
-            </svg>
-          </button>
+    <section className="quotes-editorial">
+      <div className="quotes-editorial__container">
+        <div className="quotes-editorial__content">
+          <blockquote className="quotes-editorial__text">
+            "{quotes[currentIndex].text}"
+          </blockquote>
+          <span className="quotes-editorial__author">&mdash; {quotes[currentIndex].author}</span>
         </div>
-
-        <div className="qcarousel__dots">
-          {quotes.map((_, i) => (
-            <button
-              key={i}
-              className={`qcarousel__dot ${i === current ? 'qcarousel__dot--active' : ''}`}
-              onClick={() => goTo(i)}
-              aria-label={`Ir a frase ${i + 1}`}
-            />
-          ))}
+        
+        <div className="quotes-editorial__controls">
+          <button className="quotes-editorial__btn" onClick={prevQuote}>
+            ANTERIOR
+          </button>
+          
+          <div className="quotes-editorial__counter">
+            0{currentIndex + 1} / 0{quotes.length}
+          </div>
+          
+          <button className="quotes-editorial__btn" onClick={nextQuote}>
+            SIGUIENTE
+          </button>
         </div>
       </div>
     </section>

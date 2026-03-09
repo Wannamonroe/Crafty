@@ -1,143 +1,111 @@
-.qcarousel {
+.quotes-editorial {
   position: relative;
-  padding: 80px 24px;
-  background: var(--white);
-  overflow: hidden;
+  background: var(--bg-color);
+  padding: 120px 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  border-top: 1px solid rgba(0,0,0,0.05); /* Separador sutil */
 }
 
-.qcarousel::before {
+.quotes-editorial__container {
+  max-width: 1400px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quotes-editorial__content {
+  text-align: center;
+  max-width: 1000px;
+  margin: 0 auto;
+  animation: fadeIn 0.8s ease both;
+}
+
+.quotes-editorial__text {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--dark);
+  margin-bottom: 40px;
+}
+
+.quotes-editorial__author {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--gray);
+  font-weight: 600;
+}
+
+.quotes-editorial__controls {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 100px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding-top: 32px;
+}
+
+.quotes-editorial__btn {
+  background: transparent;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--dark);
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.quotes-editorial__btn::after {
   content: '';
   position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(248, 228, 128, 0.15) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.qcarousel__inner {
-  max-width: 900px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 32px;
-  position: relative;
-  z-index: 1;
-}
-
-.qcarousel__track {
-  display: flex;
-  align-items: center;
-  gap: 24px;
+  bottom: -4px;
+  left: 0;
   width: 100%;
+  height: 1px;
+  background: var(--primary);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
 }
 
-.qcarousel__arrow {
-  flex-shrink: 0;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.03);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  color: var(--dark);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.25s ease;
+.quotes-editorial__btn:hover {
+  color: var(--primary);
 }
 
-.qcarousel__arrow:hover {
-  background: #fff;
-  border-color: rgba(0, 0, 0, 0.15);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+.quotes-editorial__btn:hover::after {
+  transform: scaleX(1);
 }
 
-.qcarousel__content {
-  flex: 1;
-  text-align: center;
-  padding: 0 16px;
-  min-height: 120px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
+.quotes-editorial__counter {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--gray);
+  letter-spacing: 0.1em;
 }
 
-.qcarousel__content--in {
-  animation: slideIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.qcarousel__content--out {
-  animation: slideOut 0.4s ease both;
-}
-
-@keyframes slideIn {
-  from { opacity: 0; transform: translateY(16px); }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes slideOut {
-  from { opacity: 1; transform: translateY(0); }
-  to { opacity: 0; transform: translateY(-12px); }
-}
-
-.qcarousel__quote-icon {
-  font-family: 'Playfair Display', serif;
-  font-size: 5rem;
-  color: var(--primary-dark);
-  opacity: 0.2;
-  line-height: 0.5;
-  margin-bottom: 8px;
-}
-
-.qcarousel__text {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.1rem, 3vw, 1.6rem);
-  font-style: italic;
-  color: var(--dark);
-  line-height: 1.5;
-}
-
-.qcarousel__sub {
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: var(--gray);
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  opacity: 0.8;
-}
-
-.qcarousel__dots {
-  display: flex;
-  gap: 8px;
-}
-
-.qcarousel__dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.1);
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  padding: 0;
-}
-
-.qcarousel__dot--active {
-  background: var(--dark);
-  width: 24px;
-  border-radius: 4px;
-}
-
-@media (max-width: 600px) {
-  .qcarousel__track {
-    gap: 12px;
+@media (max-width: 768px) {
+  .quotes-editorial {
+    padding: 80px 24px;
+    min-height: 60vh;
   }
-
-  .qcarousel__arrow {
-    width: 38px;
-    height: 38px;
+  
+  .quotes-editorial__controls {
+    margin-top: 60px;
   }
 }

@@ -32,7 +32,6 @@ export default function Navbar() {
       <div className="navbar__container">
         <a href="#inicio" className="navbar__brand" onClick={() => handleNavClick('#inicio')}>
           <img src={logo} alt="Crafty Logo" className="navbar__logo" />
-          <span className="navbar__brand-name">CRAFTY</span>
         </a>
 
         <ul className={`navbar__links ${menuOpen ? 'navbar__links--open' : ''}`}>
@@ -59,7 +58,6 @@ export default function Navbar() {
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
-          <span></span>
           <span></span>
           <span></span>
         </button>

@@ -1,15 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap");
 
 :root {
-  --primary: #f8e480;
-  --primary-dark: #d8c360;
-  --primary-light: #fef7d9;
-  --black: #050505;
-  --dark: #1a1a1a;
-  --dark-card: #fdfdfc;
-  --gray: #666;
-  --light-gray: #e5e5e5;
-  --white: #faf9f6;
+  --primary: #d4af37; /* Un dorado más "oro viejo/editorial" */
+  --primary-light: #f5eedc;
+  --dark: #121212;
+  --gray: #7a7a7a;
+  --light-gray: #e8e8e8;
+  --border: #e0e0e0;
+  --bg-color: #faf9f6; /* Blanco roto cálido típico de papel de revista */
+  --white: #ffffff;
+  
   --font-body: "Outfit", sans-serif;
   --font-display: "Playfair Display", serif;
 }
@@ -24,56 +24,39 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
 }
 
 body {
   font-family: var(--font-body);
-  background-color: var(--white);
-  background-image:
-    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(248, 228, 128, 0.15) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 90%, rgba(248, 228, 128, 0.12) 0%, transparent 55%),
-    radial-gradient(ellipse 100% 80% at 50% 50%, rgba(255, 255, 255, 0.8) 0%, transparent 80%);
-  background-attachment: fixed;
+  background-color: var(--bg-color);
   color: var(--dark);
   overflow-x: hidden;
   line-height: 1.6;
-  animation: bgShift 16s ease-in-out infinite alternate;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@keyframes bgShift {
-  0% {
-    background-image:
-      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(248, 228, 128, 0.15) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 50% at 80% 90%, rgba(248, 228, 128, 0.12) 0%, transparent 55%),
-      radial-gradient(ellipse 100% 80% at 50% 50%, rgba(255, 255, 255, 0.8) 0%, transparent 80%);
-  }
-  50% {
-    background-image:
-      radial-gradient(ellipse 70% 70% at 70% 20%, rgba(248, 228, 128, 0.18) 0%, transparent 60%),
-      radial-gradient(ellipse 80% 40% at 15% 80%, rgba(248, 228, 128, 0.10) 0%, transparent 55%),
-      radial-gradient(ellipse 100% 80% at 50% 50%, rgba(255, 255, 255, 0.8) 0%, transparent 80%);
-  }
-  100% {
-    background-image:
-      radial-gradient(ellipse 60% 80% at 40% 5%, rgba(248, 228, 128, 0.12) 0%, transparent 60%),
-      radial-gradient(ellipse 70% 60% at 85% 70%, rgba(248, 228, 128, 0.14) 0%, transparent 55%),
-      radial-gradient(ellipse 100% 80% at 50% 50%, rgba(255, 255, 255, 0.8) 0%, transparent 80%);
-  }
-}
-
-
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--white);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--primary-dark);
-  border-radius: 3px;
+/* Tipografía de utilidad global */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--dark);
 }
 
 a {
   text-decoration: none;
   color: inherit;
 }
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gray);
+}
+

@@ -4,64 +4,41 @@ import craftyLogo from '../assets/craftylogo.png';
 export default function Hero() {
   return (
     <section className="hero" id="inicio">
-      <div className="hero__bg-grid"></div>
-      <div className="hero__glow hero__glow--top"></div>
-      <div className="hero__glow hero__glow--bottom"></div>
-
-      <div className="hero__content">
-        <div className="hero__logo-wrap">
-          <div className="hero__logo-halo"></div>
-          <img src={craftyLogo} alt="Crafty" className="hero__logo-img" />
-        </div>
-
-        <div className="hero__badge">
-          <span className="hero__badge-dot"></span>
-          <span>Second Life Fashion · Virtual Couture</span>
-        </div>
-
-        <h1 className="hero__title">
-          <span className="hero__title-line">Moda que</span>
-          <span className="hero__title-line hero__title-line--accent">vive dos veces</span>
-        </h1>
-
-        <p className="hero__subtitle">
-          Diseños exclusivos para tu avatar. Cada pieza, una obra de arte digital.
-          Descubre la colección que redefine el estilo en Second Life.
-        </p>
-
-        <div className="hero__actions">
-          <a href="#coleccion" className="hero__btn hero__btn--primary">
-            <span>Explorar Colección</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </a>
-          <a href="#nosotros" className="hero__btn hero__btn--secondary">
-            Sobre Crafty
+      <div className="hero__container">
+        
+        <div className="hero__left">
+          <span className="hero__pre-title">Second Life Fashion &middot; Virtual Couture</span>
+          
+          <h1 className="hero__title">
+            <span className="hero__title-line">Moda que</span>
+            <div className="hero__title-line-mixed">
+              <span>vive</span>
+              <img src={craftyLogo} alt="Crafty" className="hero__inline-logo" />
+            </div>
+            <span className="hero__title-line">dos veces</span>
+          </h1>
+          
+          <p className="hero__subtitle">
+            Diseños exclusivos para tu avatar. Cada pieza es una obra de arte digital concebida para redefinir el estándar estético en Second Life.
+          </p>
+          
+          <a href="#coleccion" className="hero__btn">
+            Explorar Colección
           </a>
         </div>
 
-        <div className="hero__stats">
-          <div className="hero__stat">
-            <span className="hero__stat-num">500+</span>
-            <span className="hero__stat-label">Diseños únicos</span>
+        <div className="hero__right">
+          <div className="hero__image-placeholder">
+             {/* Aquí iría una foto destacada editorial, o espacio flotante */}
+             <div className="hero__decor-circle"></div>
           </div>
-          <div className="hero__stat-divider"></div>
-          <div className="hero__stat">
-            <span className="hero__stat-num">12K+</span>
-            <span className="hero__stat-label">Avatares vestidos</span>
-          </div>
-          <div className="hero__stat-divider"></div>
-          <div className="hero__stat">
-            <span className="hero__stat-num">∞</span>
-            <span className="hero__stat-label">Posibilidades</span>
+          
+          <div className="hero__scroll-indicator">
+            <span className="hero__scroll-text">Descubre más</span>
+            <div className="hero__scroll-line"></div>
           </div>
         </div>
-      </div>
 
-      <div className="hero__scroll-hint">
-        <div className="hero__scroll-line"></div>
-        <span>Scroll</span>
       </div>
     </section>
   );
