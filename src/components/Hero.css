@@ -50,12 +50,51 @@
   to { opacity: 1; transform: translateX(-50%) scale(1.05); }
 }
 
+.hero__logo-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 36px;
+  animation: fadeUp 0.8s ease both;
+}
+
+.hero__logo-halo {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(248, 228, 128, 0.25) 0%, transparent 70%);
+  filter: blur(24px);
+  animation: haloPulse 3s ease-in-out infinite alternate;
+}
+
+.hero__logo-img {
+  position: relative;
+  width: clamp(100px, 18vw, 160px);
+  height: auto;
+  filter: drop-shadow(0 0 30px rgba(248, 228, 128, 0.5));
+  animation: floatLogo 4s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes haloPulse {
+  from { opacity: 0.6; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes floatLogo {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
 .hero__content {
   position: relative;
   z-index: 2;
   text-align: center;
   max-width: 820px;
 }
+
 
 .hero__badge {
   display: inline-flex;

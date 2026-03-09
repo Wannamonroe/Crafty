@@ -1,4 +1,5 @@
 import './Hero.css';
+import craftyLogo from '../assets/craftylogo.png';
 
 export default function Hero() {
   return (
@@ -8,6 +9,11 @@ export default function Hero() {
       <div className="hero__glow hero__glow--bottom"></div>
 
       <div className="hero__content">
+        <div className="hero__logo-wrap">
+          <div className="hero__logo-halo"></div>
+          <img src={craftyLogo} alt="Crafty" className="hero__logo-img" />
+        </div>
+
         <div className="hero__badge">
           <span className="hero__badge-dot"></span>
           <span>Second Life Fashion · Virtual Couture</span>
