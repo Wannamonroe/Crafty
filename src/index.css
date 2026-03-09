@@ -2,14 +2,14 @@
 
 :root {
   --primary: #f8e480;
-  --primary-dark: #e6cf55;
-  --primary-light: #fdf3b3;
-  --black: #0d0d0d;
+  --primary-dark: #d8c360;
+  --primary-light: #fef7d9;
+  --black: #050505;
   --dark: #1a1a1a;
-  --dark-card: #242424;
-  --gray: #555;
-  --light-gray: #aaa;
-  --white: #ffffff;
+  --dark-card: #fdfdfc;
+  --gray: #666;
+  --light-gray: #e5e5e5;
+  --white: #faf9f6;
   --font-body: "Outfit", sans-serif;
   --font-display: "Playfair Display", serif;
 }
@@ -28,13 +28,13 @@ html {
 
 body {
   font-family: var(--font-body);
-  background-color: var(--black);
+  background-color: var(--white);
   background-image:
-    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(248, 228, 128, 0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 90%, rgba(248, 228, 128, 0.06) 0%, transparent 55%),
-    radial-gradient(ellipse 100% 80% at 50% 50%, rgba(30, 20, 5, 0.5) 0%, transparent 80%);
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(248, 228, 128, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 90%, rgba(248, 228, 128, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 100% 80% at 50% 50%, rgba(255, 255, 255, 0.8) 0%, transparent 80%);
   background-attachment: fixed;
-  color: var(--white);
+  color: var(--dark);
   overflow-x: hidden;
   line-height: 1.6;
   animation: bgShift 16s ease-in-out infinite alternate;
@@ -43,21 +43,21 @@ body {
 @keyframes bgShift {
   0% {
     background-image:
-      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(248, 228, 128, 0.08) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 50% at 80% 90%, rgba(248, 228, 128, 0.06) 0%, transparent 55%),
-      radial-gradient(ellipse 100% 80% at 50% 50%, rgba(30, 20, 5, 0.5) 0%, transparent 80%);
+      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(248, 228, 128, 0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 90%, rgba(248, 228, 128, 0.12) 0%, transparent 55%),
+      radial-gradient(ellipse 100% 80% at 50% 50%, rgba(255, 255, 255, 0.8) 0%, transparent 80%);
   }
   50% {
     background-image:
-      radial-gradient(ellipse 70% 70% at 70% 20%, rgba(248, 228, 128, 0.10) 0%, transparent 60%),
-      radial-gradient(ellipse 80% 40% at 15% 80%, rgba(248, 228, 128, 0.07) 0%, transparent 55%),
-      radial-gradient(ellipse 100% 80% at 50% 50%, rgba(30, 20, 5, 0.5) 0%, transparent 80%);
+      radial-gradient(ellipse 70% 70% at 70% 20%, rgba(248, 228, 128, 0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 40% at 15% 80%, rgba(248, 228, 128, 0.10) 0%, transparent 55%),
+      radial-gradient(ellipse 100% 80% at 50% 50%, rgba(255, 255, 255, 0.8) 0%, transparent 80%);
   }
   100% {
     background-image:
-      radial-gradient(ellipse 60% 80% at 40% 5%, rgba(248, 228, 128, 0.09) 0%, transparent 60%),
-      radial-gradient(ellipse 70% 60% at 85% 70%, rgba(248, 228, 128, 0.05) 0%, transparent 55%),
-      radial-gradient(ellipse 100% 80% at 50% 50%, rgba(30, 20, 5, 0.5) 0%, transparent 80%);
+      radial-gradient(ellipse 60% 80% at 40% 5%, rgba(248, 228, 128, 0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 70% 60% at 85% 70%, rgba(248, 228, 128, 0.14) 0%, transparent 55%),
+      radial-gradient(ellipse 100% 80% at 50% 50%, rgba(255, 255, 255, 0.8) 0%, transparent 80%);
   }
 }
 
@@ -66,10 +66,10 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--black);
+  background: var(--white);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--primary);
+  background: var(--primary-dark);
   border-radius: 3px;
 }
 

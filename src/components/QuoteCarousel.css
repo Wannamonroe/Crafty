@@ -1,7 +1,7 @@
 .qcarousel {
   position: relative;
   padding: 80px 24px;
-  background: #111111;
+  background: var(--white);
   overflow: hidden;
 }
 
@@ -10,7 +10,7 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(248, 228, 128, 0.06) 0%, transparent 70%);
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(248, 228, 128, 0.15) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -37,9 +37,9 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: rgba(248, 228, 128, 0.08);
-  border: 1px solid rgba(248, 228, 128, 0.2);
-  color: #f8e480;
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: var(--dark);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,9 +48,9 @@
 }
 
 .qcarousel__arrow:hover {
-  background: rgba(248, 228, 128, 0.16);
-  border-color: rgba(248, 228, 128, 0.5);
-  box-shadow: 0 0 20px rgba(248, 228, 128, 0.2);
+  background: #fff;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .qcarousel__content {
@@ -86,8 +86,8 @@
 .qcarousel__quote-icon {
   font-family: 'Playfair Display', serif;
   font-size: 5rem;
-  color: #f8e480;
-  opacity: 0.3;
+  color: var(--primary-dark);
+  opacity: 0.2;
   line-height: 0.5;
   margin-bottom: 8px;
 }
@@ -96,17 +96,17 @@
   font-family: 'Playfair Display', serif;
   font-size: clamp(1.1rem, 3vw, 1.6rem);
   font-style: italic;
-  color: #ffffff;
+  color: var(--dark);
   line-height: 1.5;
 }
 
 .qcarousel__sub {
   font-size: 0.78rem;
   font-weight: 500;
-  color: #f8e480;
+  color: var(--gray);
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 .qcarousel__dots {
@@ -118,7 +118,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(248, 228, 128, 0.2);
+  background: rgba(0, 0, 0, 0.1);
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -126,7 +126,7 @@
 }
 
 .qcarousel__dot--active {
-  background: #f8e480;
+  background: var(--dark);
   width: 24px;
   border-radius: 4px;
 }
