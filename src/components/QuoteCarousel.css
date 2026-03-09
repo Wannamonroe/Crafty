@@ -1,0 +1,143 @@
+.qcarousel {
+  position: relative;
+  padding: 80px 24px;
+  background: #111111;
+  overflow: hidden;
+}
+
+.qcarousel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(248, 228, 128, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.qcarousel__inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.qcarousel__track {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+
+.qcarousel__arrow {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(248, 228, 128, 0.08);
+  border: 1px solid rgba(248, 228, 128, 0.2);
+  color: #f8e480;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.qcarousel__arrow:hover {
+  background: rgba(248, 228, 128, 0.16);
+  border-color: rgba(248, 228, 128, 0.5);
+  box-shadow: 0 0 20px rgba(248, 228, 128, 0.2);
+}
+
+.qcarousel__content {
+  flex: 1;
+  text-align: center;
+  padding: 0 16px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.qcarousel__content--in {
+  animation: slideIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.qcarousel__content--out {
+  animation: slideOut 0.4s ease both;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-12px); }
+}
+
+.qcarousel__quote-icon {
+  font-family: 'Playfair Display', serif;
+  font-size: 5rem;
+  color: #f8e480;
+  opacity: 0.3;
+  line-height: 0.5;
+  margin-bottom: 8px;
+}
+
+.qcarousel__text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  font-style: italic;
+  color: #ffffff;
+  line-height: 1.5;
+}
+
+.qcarousel__sub {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #f8e480;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  opacity: 0.7;
+}
+
+.qcarousel__dots {
+  display: flex;
+  gap: 8px;
+}
+
+.qcarousel__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(248, 228, 128, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.qcarousel__dot--active {
+  background: #f8e480;
+  width: 24px;
+  border-radius: 4px;
+}
+
+@media (max-width: 600px) {
+  .qcarousel__track {
+    gap: 12px;
+  }
+
+  .qcarousel__arrow {
+    width: 38px;
+    height: 38px;
+  }
+}
