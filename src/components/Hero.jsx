@@ -13,18 +13,17 @@ export default function Hero() {
           AVAILABLE EVERY SATURDAY AT 09 AM SLT
         </div>
 
-        <h1 className="hero__title">
-          <span className="hero__title-line">WELCOME TO CRAFTY</span>
-        </h1>
+
 
         <div className="hero__center-showcase">
+          <h1 className="hero__title">
+            <span className="hero__title-line">WELCOME TO CRAFTY</span>
+            <span className="hero__title-highlight">WEEKEND SALES</span>
+          </h1>
+
           <div className="hero__logo-wrapper">
             <img src={craftyLogo} alt="Crafty Logo" className="hero__main-logo" />
           </div>
-
-          <h1 className="hero__title">
-            <span className="hero__title-highlight">WEEKEND SALES</span>
-          </h1>
         </div>
 
         <div className="hero__scroll-indicator">
