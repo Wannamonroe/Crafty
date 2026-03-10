@@ -1,15 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap");
 
 :root {
-  --primary: #d4af37; /* Un dorado más "oro viejo/editorial" */
-  --primary-light: #f5eedc;
+  --primary: #d4af37;
+  /* Un dorado más "oro viejo/editorial" */
+  --primary-light: #2a2515;
   --dark: #121212;
-  --gray: #7a7a7a;
-  --light-gray: #e8e8e8;
-  --border: #e0e0e0;
-  --bg-color: #faf9f6; /* Blanco roto cálido típico de papel de revista */
+  --gray: #a0a0a0;
+  --light-gray: #333333;
+  --border: #444444;
+  --bg-color: #1a1a1a;
+  /* Dark background progressing gracefully from the black Hero cover */
   --white: #ffffff;
-  
+
   --font-body: "Outfit", sans-serif;
   --font-display: "Playfair Display", serif;
 }
@@ -30,7 +32,7 @@ html {
 body {
   font-family: var(--font-body);
   background-color: var(--bg-color);
-  color: var(--dark);
+  color: var(--white);
   overflow-x: hidden;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -38,11 +40,16 @@ body {
 }
 
 /* Tipografía de utilidad global */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-display);
   font-weight: 400;
   line-height: 1.1;
-  color: var(--dark);
+  color: var(--white);
 }
 
 a {
@@ -53,10 +60,11 @@ a {
 ::-webkit-scrollbar {
   width: 4px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--bg-color);
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--gray);
 }
-

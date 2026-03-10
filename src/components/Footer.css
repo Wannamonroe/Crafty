@@ -1,6 +1,6 @@
 .footer-editorial {
   background: var(--dark);
-  color: var(--bg-color);
+  color: var(--white);
   padding: 80px 40px 40px;
   position: relative;
   overflow: hidden;
@@ -29,7 +29,8 @@
   height: 48px;
   width: auto;
   margin-bottom: 24px;
-  filter: brightness(0) invert(1); /* Aplica blanco puro si es logo negro */
+  filter: brightness(0) invert(1);
+  /* Aplica blanco puro si es logo negro */
 }
 
 .footer-editorial__desc {
@@ -95,7 +96,8 @@
   text-align: center;
   line-height: 0.8;
   margin: 80px 0 40px;
-  opacity: 0.03; /* Texto masivo de fondo casi invisible */
+  opacity: 0.03;
+  /* Texto masivo de fondo casi invisible */
   user-select: none;
   letter-spacing: -0.04em;
 }
@@ -124,16 +126,16 @@
   .footer-editorial {
     padding: 60px 24px 24px;
   }
-  
+
   .footer-editorial__top {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  
+
   .footer-editorial__col--brand {
     padding-right: 0;
   }
-  
+
   .footer-editorial__bottom {
     flex-direction: column;
     gap: 16px;

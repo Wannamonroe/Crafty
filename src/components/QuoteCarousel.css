@@ -1,111 +1,72 @@
-.quotes-editorial {
-  position: relative;
-  background: var(--bg-color);
-  padding: 120px 40px;
+.quote-marquee {
+  background: var(--dark);
+  padding: 40px 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 80vh;
-  border-top: 1px solid rgba(0,0,0,0.05); /* Separador sutil */
-}
-
-.quotes-editorial__container {
-  max-width: 1400px;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  /* Lighter border to contrast with dark bg */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
   width: 100%;
-  position: relative;
+}
+
+.quote-marquee__group {
   display: flex;
-  flex-direction: column;
+  flex-shrink: 0;
   align-items: center;
+  animation: scrollMarquee 35s linear infinite;
 }
 
-.quotes-editorial__content {
-  text-align: center;
-  max-width: 1000px;
-  margin: 0 auto;
-  animation: fadeIn 0.8s ease both;
+.quote-marquee:hover .quote-marquee__group {
+  animation-play-state: paused;
 }
 
-.quotes-editorial__text {
+.quote-marquee__item {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 4.5rem);
-  font-style: italic;
+  font-size: clamp(2rem, 4vw, 3rem);
+  /* Considerably smaller font size */
   font-weight: 400;
-  line-height: 1.2;
-  color: var(--dark);
-  margin-bottom: 40px;
-}
-
-.quotes-editorial__author {
-  font-family: var(--font-body);
-  font-size: 0.85rem;
+  color: var(--white);
+  /* White text for dark background */
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--gray);
-  font-weight: 600;
-}
-
-.quotes-editorial__controls {
-  width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-top: 100px;
-  border-top: 1px solid rgba(0,0,0,0.08);
-  padding-top: 32px;
+  padding: 0 40px;
+  white-space: nowrap;
 }
 
-.quotes-editorial__btn {
-  background: transparent;
-  border: none;
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--dark);
-  letter-spacing: 0.2em;
-  cursor: pointer;
-  transition: color 0.3s ease;
-  position: relative;
+.quote-marquee__separator {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  margin-left: 40px;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
-.quotes-editorial__btn::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: var(--primary);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
+@keyframes scrollMarquee {
+  0% {
+    transform: translateX(0);
+  }
 
-.quotes-editorial__btn:hover {
-  color: var(--primary);
-}
-
-.quotes-editorial__btn:hover::after {
-  transform: scaleX(1);
-}
-
-.quotes-editorial__counter {
-  font-family: var(--font-body);
-  font-size: 0.8rem;
-  color: var(--gray);
-  letter-spacing: 0.1em;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
 @media (max-width: 768px) {
-  .quotes-editorial {
-    padding: 80px 24px;
-    min-height: 60vh;
+  .quote-marquee {
+    padding: 50px 0;
   }
-  
-  .quotes-editorial__controls {
-    margin-top: 60px;
+
+  .quote-marquee__item {
+    font-size: clamp(2rem, 8vw, 2.5rem);
+    padding: 0 20px;
+  }
+
+  .quote-marquee__separator {
+    width: 10px;
+    height: 10px;
+    margin-left: 20px;
   }
 }

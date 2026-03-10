@@ -10,12 +10,12 @@
 }
 
 .navbar--scrolled {
-  background: rgba(250, 249, 246, 0.95);
+  background: rgba(26, 26, 26, 0.95);
   /* Color bg-color pero semitransparente */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
-  /* Separador ultrafino */
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
+  /* Separador ultrafino claro */
   padding: 12px 0;
 }
 
@@ -140,32 +140,32 @@
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* ----- ESTADOS SCROLLEADOS (Sobre fondo claro) ----- */
+/* ----- ESTADOS SCROLLEADOS (Sobre fondo oscuro) ----- */
 .navbar--scrolled .navbar__link {
   color: var(--gray);
 }
 
 .navbar--scrolled .navbar__link:hover,
 .navbar--scrolled .navbar__link--active {
-  color: var(--dark);
+  color: var(--white);
 }
 
 .navbar--scrolled .navbar__link::after {
-  background: var(--dark);
+  background: var(--white);
 }
 
 .navbar--scrolled .navbar__cta {
-  color: var(--dark);
-  border-color: var(--dark);
+  color: var(--white);
+  border-color: var(--white);
 }
 
 .navbar--scrolled .navbar__cta:hover {
-  background: var(--dark);
+  background: var(--white);
   color: var(--bg-color);
 }
 
 .navbar--scrolled .navbar__hamburger span {
-  background: var(--dark);
+  background: var(--white);
 }
 
 /* ----- FIN ESTADOS SCROLLEADOS ----- */
@@ -204,25 +204,25 @@
 
   .navbar__links--open .navbar__link:hover,
   .navbar__links--open .navbar__link--active {
-    color: var(--dark);
+    color: var(--white);
   }
 
   .navbar__links--open .navbar__link::after {
-    background: var(--dark);
+    background: var(--white);
   }
 
   .navbar__links--open .navbar__cta {
-    color: var(--dark);
-    border-color: var(--dark);
+    color: var(--white);
+    border-color: var(--white);
   }
 
   .navbar__links--open .navbar__cta:hover {
-    background: var(--dark);
+    background: var(--white);
     color: var(--bg-color);
   }
 
   .navbar__hamburger.navbar__hamburger--open span {
-    background: var(--dark);
+    background: var(--white);
   }
 
   .navbar__link {
