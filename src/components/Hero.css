@@ -6,8 +6,22 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background-color: var(--dark);
+  background: linear-gradient(-45deg, var(--dark), #1a1a1a, #2a2a2a, var(--primary-light));
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
   color: var(--white);
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .hero__background-glow {
