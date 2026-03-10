@@ -36,13 +36,15 @@
 .navbar__logo {
   height: 38px;
   width: auto;
+  transform: scale(1.9);
+  transform-origin: left center;
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 /* Removed filter so the logo shows its true colors */
 
 .navbar__brand:hover .navbar__logo {
-  transform: scale(1.05);
+  transform: scale(1.7);
 }
 
 .navbar__links {
