@@ -10,7 +10,7 @@ export default function Hero() {
       <div className="hero__container">
         <div className="hero__top-badge">
           <span className="hero__badge-dot"></span>
-          AVAILABLE EVERY SATURDAY AT 09 AM SLT
+          AVAILABLE EVERY FRIDAY AT 08 AM SLT
         </div>
 
         <div className="hero__center-showcase">
