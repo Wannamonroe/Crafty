@@ -1,144 +1,107 @@
-.footer-editorial {
+.footer-modern {
   background: var(--dark);
-  color: var(--white);
   padding: 80px 40px 40px;
   position: relative;
-  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.footer-editorial__top {
+.footer-modern__container {
   max-width: 1400px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 60px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: 60px;
-}
-
-.footer-editorial__col {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
-.footer-editorial__col--brand {
-  padding-right: 40px;
+.footer-modern__brand {
+  margin-bottom: 60px;
 }
 
-.footer-editorial__logo {
-  height: 48px;
+.footer-modern__logo {
+  height: 60px;
   width: auto;
   margin-bottom: 24px;
-  filter: brightness(0) invert(1);
-  /* Aplica blanco puro si es logo negro */
+  /* Removed the invert filter to allow true colors to show */
+  transition: transform 0.4s ease;
 }
 
-.footer-editorial__desc {
+.footer-modern__logo:hover {
+  transform: scale(1.05);
+}
+
+.footer-modern__tagline {
   font-family: var(--font-body);
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.6);
-  max-width: 320px;
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  color: var(--gray);
+  text-transform: uppercase;
 }
 
-.footer-editorial__heading {
+.footer-modern__nav {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-modern__link {
   font-family: var(--font-body);
   font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--white);
-  margin-bottom: 24px;
-}
-
-.footer-editorial__links {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.footer-editorial__links a {
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.5);
-  transition: color 0.3s ease;
-}
-
-.footer-editorial__links a:hover {
-  color: var(--white);
-}
-
-.footer-editorial__socials {
-  display: flex;
-  gap: 24px;
-}
-
-.footer-editorial__socials a {
-  font-family: var(--font-body);
-  font-size: 0.9rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.6);
-  text-transform: uppercase;
+  color: var(--white);
   letter-spacing: 0.1em;
+  text-transform: uppercase;
   transition: color 0.3s ease;
 }
 
-.footer-editorial__socials a:hover {
+.footer-modern__link:hover {
+  color: var(--primary);
+}
+
+.footer-modern__socials {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 80px;
+}
+
+.footer-modern__socials a {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--gray);
+  letter-spacing: 0.2em;
+  transition: color 0.3s ease;
+}
+
+.footer-modern__socials a:hover {
   color: var(--white);
 }
 
-.footer-editorial__massive-brand {
-  font-family: var(--font-display);
-  font-size: clamp(4rem, 15vw, 18rem);
-  font-weight: 700;
-  color: var(--white);
-  text-align: center;
-  line-height: 0.8;
-  margin: 80px 0 40px;
-  opacity: 0.03;
-  /* Texto masivo de fondo casi invisible */
-  user-select: none;
-  letter-spacing: -0.04em;
-}
-
-.footer-editorial__bottom {
-  max-width: 1400px;
-  margin: 0 auto;
+.footer-modern__bottom {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
   font-family: var(--font-body);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.4);
-  text-transform: uppercase;
   letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
-@media (max-width: 1024px) {
-  .footer-editorial__top {
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-  }
-}
-
-@media (max-width: 600px) {
-  .footer-editorial {
-    padding: 60px 24px 24px;
+@media (max-width: 768px) {
+  .footer-modern {
+    padding: 60px 24px 30px;
   }
 
-  .footer-editorial__top {
-    grid-template-columns: 1fr;
-    gap: 40px;
+  .footer-modern__nav {
+    flex-direction: column;
+    gap: 24px;
   }
 
-  .footer-editorial__col--brand {
-    padding-right: 0;
-  }
-
-  .footer-editorial__bottom {
+  .footer-modern__bottom {
     flex-direction: column;
     gap: 16px;
-    text-align: center;
   }
 }

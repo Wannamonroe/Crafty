@@ -4,7 +4,7 @@ import './Navbar.css';
 
 const navLinks = [
   { href: '#inicio', label: 'Inicio' },
-  { href: '#coleccion', label: 'Colección' },
+  { href: '#coleccion', label: 'Gallery' },
   { href: '#nosotros', label: 'Nosotros' },
   { href: '#contacto', label: 'Contacto' },
 ];

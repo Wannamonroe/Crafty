@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import './Gallery.css';
 
-const categories = ['Todos', 'Vestidos', 'Chaquetas', 'Tops', 'Faldas', 'Pantalones', 'Conjuntos'];
-
 const items = [
   { id: 1, name: 'Eclipse Dress', category: 'Vestidos', isNew: true },
   { id: 2, name: 'Nova Jacket', category: 'Chaquetas', isNew: false },
@@ -15,34 +13,18 @@ const items = [
 ];
 
 export default function Gallery() {
-  const [activeTab, setActiveTab] = useState('Todos');
   const [hoveredId, setHoveredId] = useState(null);
-
-  const filteredItems = activeTab === 'Todos' 
-    ? items 
-    : items.filter(item => item.category === activeTab);
 
   return (
     <section className="lookbook" id="coleccion">
       <div className="lookbook__header">
-        <h2 className="lookbook__title">Colección</h2>
-        <div className="lookbook__filters">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              className={`lookbook__filter-btn ${activeTab === cat ? 'lookbook__filter-btn--active' : ''}`}
-              onClick={() => setActiveTab(cat)}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+        <h2 className="lookbook__title">Gallery</h2>
       </div>
 
       <div className="lookbook__grid">
-        {filteredItems.map((item) => (
-          <article 
-            key={item.id} 
+        {items.map((item) => (
+          <article
+            key={item.id}
             className="lookbook__item"
             onMouseEnter={() => setHoveredId(item.id)}
             onMouseLeave={() => setHoveredId(null)}

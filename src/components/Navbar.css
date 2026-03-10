@@ -39,11 +39,7 @@
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-/* Cuando estamos arriba del todo (fondo oscuro), hacemos el logo blanco para que resalte.
-   Puedes quitar este filter si tu logo ya es claro o se ve bien sobre oscuro. */
-.navbar:not(.navbar--scrolled) .navbar__logo {
-  filter: brightness(0) invert(1);
-}
+/* Removed filter so the logo shows its true colors */
 
 .navbar__brand:hover .navbar__logo {
   transform: scale(1.05);
