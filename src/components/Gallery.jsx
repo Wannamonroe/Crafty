@@ -16,7 +16,7 @@ export default function Gallery() {
   const [hoveredId, setHoveredId] = useState(null);
 
   return (
-    <section className="lookbook" id="coleccion">
+    <section className="lookbook" id="gallery">
       <div className="lookbook__header">
         <h2 className="lookbook__title">Gallery</h2>
       </div>
