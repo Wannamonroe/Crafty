@@ -31,7 +31,7 @@ export default function Gallery() {
           >
             <div className="lookbook__image-wrap">
               <div className="lookbook__image-placeholder">
-                <span className="lookbook__image-text">Imagen próximamente</span>
+                <span className="lookbook__image-text">Image coming soon</span>
               </div>
             </div>
             <div className="lookbook__info">

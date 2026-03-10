@@ -3,16 +3,15 @@ import logo from '../assets/craftylogo.png';
 import './Navbar.css';
 
 const navLinks = [
-  { href: '#inicio', label: 'Inicio' },
-  { href: '#coleccion', label: 'Gallery' },
-  { href: '#nosotros', label: 'Nosotros' },
-  { href: '#contacto', label: 'Contacto' },
+  { href: '#home', label: 'Home' },
+  { href: '#gallery', label: 'Gallery' },
+  { href: '#about', label: 'About Us' },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('inicio');
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,7 +29,7 @@ export default function Navbar() {
   return (
     <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
       <div className="navbar__container">
-        <a href="#inicio" className="navbar__brand" onClick={() => handleNavClick('#inicio')}>
+        <a href="#home" className="navbar__brand" onClick={() => handleNavClick('#home')}>
           <img src={logo} alt="Crafty Logo" className="navbar__logo" />
         </a>
 
@@ -47,8 +46,8 @@ export default function Navbar() {
             </li>
           ))}
           <li>
-            <a href="#coleccion" className="navbar__cta" onClick={() => handleNavClick('#coleccion')}>
-              Ver Tienda
+            <a href="#gallery" className="navbar__cta" onClick={() => handleNavClick('#gallery')}>
+              Visit Store
             </a>
           </li>
         </ul>
