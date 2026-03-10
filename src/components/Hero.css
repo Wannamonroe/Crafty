@@ -16,9 +16,11 @@
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -147,8 +149,8 @@
 
 .hero__title {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: 400;
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  font-weight: 500;
   line-height: 1;
   color: var(--white);
   letter-spacing: 0.05em;
@@ -158,6 +160,7 @@
   flex-direction: column;
   gap: 0px;
   /* Reduced gap */
+  margin-top: 5vh;
 }
 
 .hero__title-line {
@@ -167,7 +170,7 @@
 
 .hero__title-highlight {
   color: var(--primary);
-  font-weight: 700;
+  font-weight: 800;
   font-size: clamp(3rem, 7vw, 6.5rem);
   /* Slightly reduced to fit vertically */
   letter-spacing: -0.02em;
@@ -176,9 +179,9 @@
 
 /* LOGO WRAPPER */
 .hero__logo-wrapper {
-  margin-top: -6vh;
+  margin-top: -20vh;
   /* Shifts the logo up towards the title */
-  width: clamp(280px, 45vw, 600px);
+  width: clamp(400px, 65vw, 900px);
   /* Slightly reduced width to control inherent image height */
   display: flex;
   align-items: center;
@@ -268,7 +271,7 @@
   }
 
   .hero__title {
-    font-size: clamp(1.8rem, 6vw, 2.5rem);
+    font-size: clamp(2.5rem, 8vw, 3.5rem);
   }
 
   .hero__title-highlight {

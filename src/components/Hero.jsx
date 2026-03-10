@@ -15,8 +15,7 @@ export default function Hero() {
 
         <div className="hero__center-showcase">
           <h1 className="hero__title">
-            <span className="hero__title-line">WELCOME TO CRAFTY</span>
-            <span className="hero__title-highlight">WEEKEND SALES</span>
+            <span className="hero__title-line">WELCOME TO</span>
           </h1>
 
           <div className="hero__logo-wrapper">
