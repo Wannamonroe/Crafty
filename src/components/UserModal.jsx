@@ -34,12 +34,24 @@ export default function UserModal({ user, onClose }) {
     };
 
     try {
-      const { data, error: functionError } = await supabase.functions.invoke('manage-users', {
-        body: payload
+      const { data: sessionData } = await supabase.auth.getSession();
+      const token = sessionData.session?.access_token;
+
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/manage-users`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+          'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY
+        },
+        body: JSON.stringify(payload)
       });
 
-      if (functionError) throw functionError;
-      if (data?.error) throw new Error(data.error);
+      const data = await response.json();
+
+      if (!response.ok || data?.error) {
+        throw new Error(data?.error || `Status HTTP ${response.status}`);
+      }
 
       // Success! Close modal and refresh.
       onClose(true);

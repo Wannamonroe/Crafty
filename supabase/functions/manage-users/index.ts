@@ -128,9 +128,13 @@ serve(async (req) => {
     })
 
   } catch (error) {
+    console.error("==== GRAVE ERROR DETECTADO ====");
+    console.error(error.message);
+    console.error("===============================");
+    
     return new Response(JSON.stringify({ error: error.message }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      status: 400,
+      status: 200, // CAMBIO: Devolver 200 para que Supabase-js no nos oculte la respuesta
     })
   }
 })

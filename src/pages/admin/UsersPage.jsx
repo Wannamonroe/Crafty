@@ -29,18 +29,30 @@ export default function UsersPage() {
     setLoading(true);
     setError(null);
     try {
-      // Call our Supabase Edge Function to list users securely
-      const { data, error: functionError } = await supabase.functions.invoke('manage-users', {
-        body: { action: 'list_users' },
+      // Usamos fetch nativo en vez del cliente JS para ver la respuesta real sin filtros
+      const { data: sessionData } = await supabase.auth.getSession();
+      const token = sessionData.session?.access_token;
+
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/manage-users`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+          'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY
+        },
+        body: JSON.stringify({ action: 'list_users' })
       });
 
-      if (functionError) throw functionError;
-      if (data?.error) throw new Error(data.error);
+      const data = await response.json();
+
+      if (!response.ok || data?.error) {
+        throw new Error(data?.error || `Status HTTP ${response.status}`);
+      }
 
       setUsers(data?.users || []);
     } catch (err) {
       console.error('Error fetching users:', err);
-      setError('Detalles del error: ' + (err.message || 'Error desconocido al invocar la función.'));
+      setError('Error detallado: ' + (err.message || 'Error desconocido al invocar la función.'));
     } finally {
       setLoading(false);
     }
@@ -60,12 +72,24 @@ export default function UsersPage() {
     if (!window.confirm('¿Estás seguro de que deseas eliminar este usuario? Esta acción no se puede deshacer.')) return;
     
     try {
-      const { data, error: functionError } = await supabase.functions.invoke('manage-users', {
-        body: { action: 'delete_user', id: userId },
+      const { data: sessionData } = await supabase.auth.getSession();
+      const token = sessionData.session?.access_token;
+
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/manage-users`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+          'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY
+        },
+        body: JSON.stringify({ action: 'delete_user', id: userId })
       });
 
-      if (functionError) throw functionError;
-      if (data?.error) throw new Error(data.error);
+      const data = await response.json();
+
+      if (!response.ok || data?.error) {
+        throw new Error(data?.error || `Status HTTP ${response.status}`);
+      }
 
       // Refresh table
       fetchUsers();
