@@ -29,17 +29,16 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 
 CREATE TRIGGER on_auth_user_created
   AFTER INSERT ON auth.users
-  FOR EACH ROW EXECUTE PROCEDURE public.handle_new_user();
-
 -- ==========================================
--- IMPORTANT: To create your first admin user
+-- IMPORTANT: To resolve the PGRST116 error it means your user does not
+-- exist in the 'profiles' table yet.
 -- ==========================================
--- 1. Go to your Supabase Dashboard -> Authentication -> Users
--- 2. Click "Add User" -> "Create New User" 
--- 3. Enter email: admin@crafty.com and password: <YourSecurePassword>
--- 4. Supabase will automatically create a user in auth.users and a linked 'sin acceso' profile.
--- 5. Then, run the following SQL command to make them an admin:
+-- 1. Si te sale el error "PGRST116: Cannot coerce the result to a single JSON object",
+--    es porque tu usuario fue creado ANTES de la tabla, y el sistema no le asignó rol.
+-- 2. Ejecuta la siguiente sentencia en Supabase para insertar a tu usuario
+--    directamente en los perfiles como 'superadmin' y solucionar el problema:
 
--- UPDATE public.profiles
--- SET role = 'admin'
--- WHERE id = (SELECT id FROM auth.users WHERE email = 'admin@crafty.com');
+INSERT INTO public.profiles (id, role)
+SELECT id, 'superadmin'
+FROM auth.users
+WHERE email = 'marcausente@gmail.com';

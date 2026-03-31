@@ -33,7 +33,8 @@ export default function Login() {
           .single();
 
         if (profileError) {
-          throw new Error('No se pudo verificar el rol de administrador.');
+          console.error("Profile error:", profileError);
+          throw new Error(`Error BD al verificar rol (` + profileError.code + `): ` + profileError.message);
         }
 
         // 3. Verify access
