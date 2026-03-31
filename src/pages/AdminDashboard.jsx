@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Outlet } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
+import AdminSidebar from '../components/AdminSidebar';
 
 export default function AdminDashboard() {
   const [userEmail, setUserEmail] = useState('');
+  const [userRole, setUserRole] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -12,10 +14,22 @@ export default function AdminDashboard() {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
         navigate('/admin/login');
-      } else {
-        setUserEmail(session.user.email);
-        setLoading(false);
+        return;
       }
+      
+      setUserEmail(session.user.email);
+      
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', session.user.id)
+        .single();
+        
+      if (profile) {
+        setUserRole(profile.role);
+      }
+      
+      setLoading(false);
     };
     
     checkUser();
@@ -31,29 +45,27 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div style={{ backgroundColor: '#1a1a1a', minHeight: '100vh', color: '#eaeaea', fontFamily: 'sans-serif' }}>
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 2rem', backgroundColor: '#000', borderBottom: '1px solid #333' }}>
-        <h1 style={{ margin: 0, fontSize: '1.5rem', color: '#7a8973' }}>Crafty Admin Panel</h1>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <span>{userEmail}</span>
-          <button 
-            onClick={handleLogout}
-            style={{ padding: '0.5rem 1rem', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
-          >
-            Cerrar sesión
-          </button>
-        </div>
-      </header>
+    <div style={{ display: 'flex', backgroundColor: '#1a1a1a', minHeight: '100vh', color: '#eaeaea', fontFamily: 'sans-serif' }}>
+      <AdminSidebar userRole={userRole} />
       
-      <main style={{ padding: '2rem' }}>
-        <div style={{ background: '#2a2a2a', padding: '2rem', borderRadius: '8px', maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
-          <h2>¡Bienvenido al Panel de Administración!</h2>
-          <p style={{ color: '#aaa', marginTop: '1rem' }}>
-            Has iniciado sesión correctamente con una cuenta de permisos elevados. 
-            Este es un panel de prueba que se expandirá en el futuro.
-          </p>
-        </div>
-      </main>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+        <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 2rem', backgroundColor: '#000', borderBottom: '1px solid #333' }}>
+          <h1 style={{ margin: 0, fontSize: '1.2rem', color: '#7a8973' }}>Crafty Admin</h1>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <span>{userEmail} <small style={{ color: '#888', textTransform: 'uppercase' }}>({userRole})</small></span>
+            <button 
+              onClick={handleLogout}
+              style={{ padding: '0.5rem 1rem', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
+            >
+              Salir
+            </button>
+          </div>
+        </header>
+        
+        <main style={{ padding: '2rem', flex: 1, overflowY: 'auto' }}>
+          <Outlet context={{ userRole }} />
+        </main>
+      </div>
     </div>
   );
 }
