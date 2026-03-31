@@ -1,23 +1,16 @@
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import AdminDashboard from './pages/AdminDashboard';
 import './index.css';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import QuoteCarousel from './components/QuoteCarousel';
-import Gallery from './components/Gallery';
-import About from './components/About';
-import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="app">
-      <Navbar />
-      <main>
-        <Hero id="home" />
-        <QuoteCarousel />
-        <Gallery />
-        <About />
-      </main>
-      <Footer />
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/admin/login" element={<Login />} />
+      <Route path="/admin" element={<AdminDashboard />} />
+    </Routes>
   );
 }
 

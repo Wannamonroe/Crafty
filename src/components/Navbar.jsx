@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import logo from '../assets/craftylogo.png';
 import './Navbar.css';
 
@@ -49,6 +50,11 @@ export default function Navbar() {
             <a href="#gallery" className="navbar__cta" onClick={() => handleNavClick('#gallery')}>
               Visit Store
             </a>
+          </li>
+          <li>
+            <Link to="/admin/login" className="navbar__admin-link" onClick={() => setMenuOpen(false)}>
+              <span className="admin-icon">⚙️</span> Admin
+            </Link>
           </li>
         </ul>
 
