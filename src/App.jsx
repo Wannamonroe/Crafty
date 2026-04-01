@@ -4,6 +4,8 @@ import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminHome from './pages/admin/AdminHome';
 import UsersPage from './pages/admin/UsersPage';
+import GalleryManager from './pages/admin/GalleryManager';
+import GalleryPack from './pages/admin/GalleryPack';
 import './index.css';
 
 function App() {
@@ -14,6 +16,8 @@ function App() {
       <Route path="/admin" element={<AdminDashboard />}>
         <Route index element={<AdminHome />} />
         <Route path="users" element={<UsersPage />} />
+        <Route path="gallery" element={<GalleryManager />} />
+        <Route path="gallery/:packId" element={<GalleryPack />} />
       </Route>
     </Routes>
   );
