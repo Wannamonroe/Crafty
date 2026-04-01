@@ -4,6 +4,7 @@ import './Gallery.css';
 
 export default function Gallery() {
   const [hoveredId, setHoveredId] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -64,13 +65,19 @@ export default function Gallery() {
             onMouseEnter={() => setHoveredId(item.id)}
             onMouseLeave={() => setHoveredId(null)}
           >
-            <div className="lookbook__image-wrap">
+            <div className="lookbook__image-wrap" onClick={() => setSelectedImage(item.image_url)}>
               <img src={item.image_url} alt={item.name} className="lookbook__image" loading="lazy" />
               
               {/* Overlay for Visit Site */}
               {hoveredId === item.id && item.site_url && (
                 <div className="lookbook__overlay">
-                  <a href={item.site_url} target="_blank" rel="noopener noreferrer" className="btn-visit-site">
+                  <a 
+                    href={item.site_url} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="btn-visit-site"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     📍 Visitar Sitio
                   </a>
                 </div>
@@ -82,6 +89,19 @@ export default function Gallery() {
           </article>
         ))}
       </div>
+
+      {/* Modal / Lightbox */}
+      {selectedImage && (
+        <div className="gallery-modal" onClick={() => setSelectedImage(null)}>
+          <span className="gallery-modal-close">&times;</span>
+          <img 
+            src={selectedImage} 
+            alt="Visor de imagen" 
+            className="gallery-modal-content" 
+            onClick={(e) => e.stopPropagation()} 
+          />
+        </div>
+      )}
     </section>
   );
 }
