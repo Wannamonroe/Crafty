@@ -7,10 +7,23 @@ export default function Gallery() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [galleryTitle, setGalleryTitle] = useState('Galería');
 
   useEffect(() => {
     fetchActiveGallery();
+    fetchGalleryTitle();
   }, []);
+
+  async function fetchGalleryTitle() {
+    try {
+      const { data, error } = await supabase
+        .from('site_settings')
+        .select('value')
+        .eq('key', 'gallery_title')
+        .single();
+      if (!error && data?.value) setGalleryTitle(data.value);
+    } catch (_) {}
+  }
 
   async function fetchActiveGallery() {
     try {
@@ -49,7 +62,7 @@ export default function Gallery() {
   return (
     <section className="lookbook" id="gallery">
       <div className="lookbook__header">
-        <h2 className="lookbook__title">Galería</h2>
+        <h2 className="lookbook__title">{galleryTitle}</h2>
       </div>
 
       <div className="lookbook__grid">

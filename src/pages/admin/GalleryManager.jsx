@@ -8,9 +8,48 @@ export default function GalleryManager() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Gallery title
+  const [galleryTitle, setGalleryTitle] = useState('Galería');
+  const [titleModalOpen, setTitleModalOpen] = useState(false);
+  const [titleInput, setTitleInput] = useState('');
+  const [titleSaving, setTitleSaving] = useState(false);
+
   useEffect(() => {
     fetchPacks();
+    fetchGalleryTitle();
   }, []);
+
+  async function fetchGalleryTitle() {
+    try {
+      const { data, error } = await supabase
+        .from('site_settings')
+        .select('value')
+        .eq('key', 'gallery_title')
+        .single();
+      if (!error && data?.value) setGalleryTitle(data.value);
+    } catch (_) {}
+  }
+
+  async function handleSaveGalleryTitle() {
+    if (!titleInput.trim()) return;
+    setTitleSaving(true);
+    try {
+      const { error } = await supabase
+        .from('site_settings')
+        .upsert(
+          { key: 'gallery_title', value: titleInput.trim(), updated_at: new Date().toISOString() },
+          { onConflict: 'key' }
+        );
+      if (error) throw error;
+      setGalleryTitle(titleInput.trim());
+      setTitleModalOpen(false);
+    } catch (err) {
+      console.error('Error guardando título:', err);
+      alert('Error al guardar el título.');
+    } finally {
+      setTitleSaving(false);
+    }
+  }
 
   async function fetchPacks() {
     try {
@@ -128,11 +167,59 @@ export default function GalleryManager() {
   return (
     <div className="gallery-manager-view">
       <div className="gallery-header">
-        <h1>Gestor de Galería</h1>
+        <div className="gallery-header__left">
+          <h1>Gestor de Galería</h1>
+          <div className="gallery-title-row">
+            <span className="gallery-title-preview">Título público: <strong>{galleryTitle}</strong></span>
+            <button
+              className="btn-change-title"
+              onClick={() => { setTitleInput(galleryTitle); setTitleModalOpen(true); }}
+            >
+              ✏️ Cambiar título de galería
+            </button>
+          </div>
+        </div>
         <button className="btn-create-pack" onClick={handleCreatePack}>
           + Crear nuevo Pack de Imágenes
         </button>
       </div>
+
+      {/* Modal cambiar título */}
+      {titleModalOpen && (
+        <div className="title-modal-overlay" onClick={() => setTitleModalOpen(false)}>
+          <div className="title-modal" onClick={(e) => e.stopPropagation()}>
+            <h2 className="title-modal__heading">Cambiar título de galería</h2>
+            <p className="title-modal__hint">Este título aparece en la página principal, encima de las fotos.</p>
+            <input
+              id="gallery-title-input"
+              type="text"
+              className="title-modal__input"
+              value={titleInput}
+              onChange={(e) => setTitleInput(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSaveGalleryTitle()}
+              placeholder="Ej: Galería, Colección, Lookbook..."
+              autoFocus
+              maxLength={80}
+            />
+            <div className="title-modal__actions">
+              <button
+                className="title-modal__cancel"
+                onClick={() => setTitleModalOpen(false)}
+                disabled={titleSaving}
+              >
+                Cancelar
+              </button>
+              <button
+                className="title-modal__save"
+                onClick={handleSaveGalleryTitle}
+                disabled={titleSaving || !titleInput.trim()}
+              >
+                {titleSaving ? 'Guardando...' : '💾 Guardar'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {error && <div className="error-message">{error}</div>}
 
