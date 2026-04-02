@@ -6,6 +6,7 @@ import AdminHome from './pages/admin/AdminHome';
 import UsersPage from './pages/admin/UsersPage';
 import GalleryManager from './pages/admin/GalleryManager';
 import GalleryPack from './pages/admin/GalleryPack';
+import FooterSettings from './pages/admin/FooterSettings';
 import './index.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="users" element={<UsersPage />} />
         <Route path="gallery" element={<GalleryManager />} />
         <Route path="gallery/:packId" element={<GalleryPack />} />
+        <Route path="footer" element={<FooterSettings />} />
       </Route>
     </Routes>
   );
