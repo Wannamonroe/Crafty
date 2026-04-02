@@ -10,6 +10,80 @@ const DEFAULT_LINKS = {
   footer_seraphim_gallery: 'https://seraphimsl.com',
 };
 
+/* ── SVG Icons ─────────────────────────────────────────────────────────── */
+
+function FacebookIcon() {
+  return (
+    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" className="social-logo">
+      <rect width="36" height="36" rx="18" fill="#1877F2"/>
+      <path
+        d="M25 18c0-3.866-3.134-7-7-7s-7 3.134-7 7c0 3.492 2.556 6.388 5.906 6.92V20.28H15.22V18h2.688v-1.672c0-2.651 1.58-4.117 3.996-4.117 1.158 0 2.368.207 2.368.207v2.603h-1.334c-1.315 0-1.724.817-1.724 1.655V18h2.934l-.469 2.281h-2.465v4.64C22.444 24.388 25 21.492 25 18z"
+        fill="#fff"
+      />
+    </svg>
+  );
+}
+
+function InworldIcon() {
+  /* Inworld AI logo — stylised "i" in a rounded square */
+  return (
+    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" className="social-logo">
+      <rect width="36" height="36" rx="10" fill="#111"/>
+      <rect width="36" height="36" rx="10" fill="url(#iw_grad)"/>
+      {/* Globe rings */}
+      <circle cx="18" cy="18" r="9.5" stroke="#fff" strokeWidth="1.4" fill="none"/>
+      <ellipse cx="18" cy="18" rx="4.5" ry="9.5" stroke="#fff" strokeWidth="1.4" fill="none"/>
+      <line x1="8.5" y1="18" x2="27.5" y2="18" stroke="#fff" strokeWidth="1.4"/>
+      <line x1="10" y1="13" x2="26" y2="13" stroke="#fff" strokeWidth="1" opacity="0.6"/>
+      <line x1="10" y1="23" x2="26" y2="23" stroke="#fff" strokeWidth="1" opacity="0.6"/>
+      <defs>
+        <linearGradient id="iw_grad" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#6C3BFF"/>
+          <stop offset="1" stopColor="#3B82F6"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
+function SeraphimIcon() {
+  /* Seraphim — stylised feathered wing / "S" mark */
+  return (
+    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" className="social-logo">
+      <rect width="36" height="36" rx="10" fill="url(#sr_grad)"/>
+      {/* Left wing */}
+      <path
+        d="M18 26 C14 22, 8 20, 9 14 C10 10, 14 10, 16 13 C12 13, 11 16, 13 18 C15 20, 17 20, 18 26Z"
+        fill="rgba(255,255,255,0.9)"
+      />
+      {/* Right wing */}
+      <path
+        d="M18 26 C22 22, 28 20, 27 14 C26 10, 22 10, 20 13 C24 13, 25 16, 23 18 C21 20, 19 20, 18 26Z"
+        fill="rgba(255,255,255,0.9)"
+      />
+      {/* Center body / halo dot */}
+      <circle cx="18" cy="12" r="2" fill="#fff"/>
+      <defs>
+        <linearGradient id="sr_grad" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#C026D3"/>
+          <stop offset="1" stopColor="#7C3AED"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
+/* ── Social button data ────────────────────────────────────────────────── */
+
+const SOCIAL_BUTTONS = [
+  { key: 'footer_facebook_album',  label: 'Facebook Album',  Icon: FacebookIcon },
+  { key: 'footer_facebook_group',  label: 'Facebook Group',  Icon: FacebookIcon },
+  { key: 'footer_inworld_group',   label: 'Inworld Group',   Icon: InworldIcon  },
+  { key: 'footer_seraphim_gallery',label: 'Seraphim Gallery',Icon: SeraphimIcon },
+];
+
+/* ── Component ─────────────────────────────────────────────────────────── */
+
 export default function Footer() {
   const [links, setLinks] = useState(DEFAULT_LINKS);
 
@@ -36,6 +110,7 @@ export default function Footer() {
   return (
     <footer className="footer-modern">
       <div className="footer-modern__container">
+
         <div className="footer-modern__brand">
           <img src={craftyLogo} alt="Crafty Logo" className="footer-modern__logo" />
           <p className="footer-modern__tagline">DIGITAL COUTURE &amp; VIRTUAL ELEGANCE</p>
@@ -49,28 +124,27 @@ export default function Footer() {
         </div>
 
         <div className="footer-modern__socials">
-          <a href={links.footer_facebook_album}  target="_blank" rel="noreferrer" className="footer-social-btn">
-            <span className="footer-social-btn__icon">📘</span>
-            FACEBOOK ALBUM
-          </a>
-          <a href={links.footer_facebook_group}  target="_blank" rel="noreferrer" className="footer-social-btn">
-            <span className="footer-social-btn__icon">👥</span>
-            FACEBOOK GROUP
-          </a>
-          <a href={links.footer_inworld_group}   target="_blank" rel="noreferrer" className="footer-social-btn">
-            <span className="footer-social-btn__icon">🌐</span>
-            INWORLD GROUP
-          </a>
-          <a href={links.footer_seraphim_gallery} target="_blank" rel="noreferrer" className="footer-social-btn">
-            <span className="footer-social-btn__icon">✨</span>
-            SERAPHIM GALLERY
-          </a>
+          {SOCIAL_BUTTONS.map(({ key, label, Icon }) => (
+            <a
+              key={key}
+              href={links[key]}
+              target="_blank"
+              rel="noreferrer"
+              className="footer-social-btn"
+            >
+              <span className="footer-social-btn__logo">
+                <Icon />
+              </span>
+              <span className="footer-social-btn__label">{label}</span>
+            </a>
+          ))}
         </div>
 
         <div className="footer-modern__bottom">
           <span className="footer-modern__copy">&copy; {new Date().getFullYear()} CRAFTY. ALL RIGHTS RESERVED.</span>
           <span className="footer-modern__credits">DESIGNED FOR SECOND LIFE</span>
         </div>
+
       </div>
     </footer>
   );
