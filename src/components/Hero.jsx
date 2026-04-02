@@ -4,9 +4,30 @@ import craftyLogo from '../assets/craftylogo.png';
 export default function Hero() {
   return (
     <section className="hero" id="home">
-      <div className="hero__ambient-light hero__ambient-light--1"></div>
-      <div className="hero__ambient-light hero__ambient-light--2"></div>
 
+      {/* ── Animated background layers ─────────────────────────── */}
+
+      {/* Grid mesh */}
+      <div className="hero__mesh" aria-hidden="true" />
+
+      {/* Large ambient orbs */}
+      <div className="hero__orb hero__orb--1" aria-hidden="true" />
+      <div className="hero__orb hero__orb--2" aria-hidden="true" />
+      <div className="hero__orb hero__orb--3" aria-hidden="true" />
+
+      {/* Floating gold particles */}
+      <div className="hero__particles" aria-hidden="true">
+        {Array.from({ length: 22 }).map((_, i) => (
+          <span key={i} className={`hero__particle hero__particle--${i + 1}`} />
+        ))}
+      </div>
+
+      {/* Diagonal shimmer lines */}
+      <div className="hero__shimmer" aria-hidden="true">
+        <span /><span /><span /><span /><span />
+      </div>
+
+      {/* ── Content ────────────────────────────────────────────── */}
       <div className="hero__container">
         <div className="hero__top-badge">
           <span className="hero__badge-dot"></span>
