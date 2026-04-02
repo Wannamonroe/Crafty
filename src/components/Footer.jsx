@@ -15,10 +15,12 @@ const DEFAULT_LINKS = {
 function FacebookIcon() {
   return (
     <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" className="social-logo">
-      <rect width="36" height="36" rx="18" fill="#1877F2"/>
+      {/* Fondo azul que rellena todo el viewBox — el contenedor lo recorta con border-radius */}
+      <rect width="36" height="36" fill="#1877F2"/>
+      {/* "f" limpia y bien centrada */}
       <path
-        d="M25 18c0-3.866-3.134-7-7-7s-7 3.134-7 7c0 3.492 2.556 6.388 5.906 6.92V20.28H15.22V18h2.688v-1.672c0-2.651 1.58-4.117 3.996-4.117 1.158 0 2.368.207 2.368.207v2.603h-1.334c-1.315 0-1.724.817-1.724 1.655V18h2.934l-.469 2.281h-2.465v4.64C22.444 24.388 25 21.492 25 18z"
         fill="#fff"
+        d="M20.5 6.5h-2.8C15 6.5 13 8.6 13 11.4v2.6h-2.5V18H13v11h4.5V18h3l.5-4h-3.5v-2.2c0-.9.5-1.3 1.3-1.3H21.5V6.5H20.5z"
       />
     </svg>
   );
