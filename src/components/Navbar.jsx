@@ -11,16 +11,32 @@ const navLinks = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+
+      // Scrolled style
+      setScrolled(currentScrollY > 50);
+
+      // Visibility logic
+      if (currentScrollY > lastScrollY && currentScrollY > 200) {
+        // Scrolling down and past a threshold
+        setVisible(false);
+      } else {
+        // Scrolling up
+        setVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   const handleNavClick = (href) => {
     setMenuOpen(false);
@@ -28,7 +44,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
+    <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''} ${!visible && !menuOpen ? 'navbar--hidden' : ''}`}>
       <div className="navbar__container">
         <a href="#home" className="navbar__brand" onClick={() => handleNavClick('#home')}>
           <img src={logo} alt="Crafty Logo" className="navbar__logo" />
@@ -48,7 +64,7 @@ export default function Navbar() {
           ))}
           <li>
             <a href="#gallery" className="navbar__cta" onClick={() => handleNavClick('#gallery')}>
-              Visit Store
+              Apply
             </a>
           </li>
           <li>
