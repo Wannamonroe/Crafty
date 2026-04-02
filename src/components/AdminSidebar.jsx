@@ -39,6 +39,15 @@ export default function AdminSidebar({ userRole }) {
             </Link>
           </li>
 
+          <li>
+            <Link
+              to="/admin/about"
+              className={`sidebar-link ${location.pathname.includes('/admin/about') ? 'active' : ''}`}
+            >
+              <span className="icon">📝</span> About Us
+            </Link>
+          </li>
+
           {userRole === 'superadmin' && (
             <li>
               <Link 

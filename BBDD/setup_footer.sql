@@ -29,5 +29,9 @@ INSERT INTO public.site_settings (key, value) VALUES
   ('footer_facebook_group',   'https://www.facebook.com'),
   ('footer_inworld_group',    'https://secondlife.com'),
   ('footer_seraphim_gallery', 'https://seraphimsl.com'),
-  ('gallery_title',           'Galería')
+  ('gallery_title',           'Galería'),
+  ('about_title',             'Digital Elegance'),
+  ('about_text',              'Crafty is a premier weekly event in Second Life dedicated to high-end virtual aesthetics. We bring together the finest digital designers to offer exclusive, meticulously crafted clothing, accessories, and aesthetic enhancements for your avatar.
+
+Every weekend, discover a curated selection of virtual couture designed to elevate your digital presence to the highest standard of luxury.')
 ON CONFLICT (key) DO NOTHING;
