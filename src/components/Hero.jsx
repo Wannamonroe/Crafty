@@ -39,8 +39,9 @@ export default function Hero() {
             <span className="hero__title-line">WELCOME TO</span>
           </h1>
 
-          <div className="hero__logo-wrapper">
+          <div className="hero__logo-wrapper" style={{ '--logo-url': `url(${craftyLogo})` }}>
             <img src={craftyLogo} alt="Crafty Logo" className="hero__main-logo" />
+            <div className="hero__logo-glint" aria-hidden="true" />
           </div>
         </div>
 
