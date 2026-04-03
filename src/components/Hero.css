@@ -611,21 +611,21 @@
 @keyframes shimmer-sweep {
 
   0%,
-  12% {
+  8% {
     background-position: 200% 200%;
     opacity: 0;
   }
 
-  18% {
+  14% {
     opacity: 1;
   }
 
-  42% {
+  65% {
     background-position: -50% -50%;
     opacity: 1;
   }
 
-  52%,
+  75%,
   100% {
     background-position: -50% -50%;
     opacity: 0;
