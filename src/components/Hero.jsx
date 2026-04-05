@@ -8,7 +8,9 @@ export default function Hero() {
       {/* ── Animated background layers ─────────────────────────── */}
 
       {/* Grid mesh */}
-      <div className="hero__mesh" aria-hidden="true" />
+      <div className="hero__mesh-container" aria-hidden="true">
+        <div className="hero__mesh" />
+      </div>
 
       {/* Large ambient orbs */}
       <div className="hero__orb hero__orb--1" aria-hidden="true" />
@@ -17,7 +19,7 @@ export default function Hero() {
 
       {/* Floating gold particles */}
       <div className="hero__particles" aria-hidden="true">
-        {Array.from({ length: 12 }).map((_, i) => (
+        {Array.from({ length: 16 }).map((_, i) => (
           <span key={i} className={`hero__particle hero__particle--${i + 1}`} />
         ))}
       </div>
