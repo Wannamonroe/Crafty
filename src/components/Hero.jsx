@@ -17,7 +17,7 @@ export default function Hero() {
 
       {/* Floating gold particles */}
       <div className="hero__particles" aria-hidden="true">
-        {Array.from({ length: 22 }).map((_, i) => (
+        {Array.from({ length: 12 }).map((_, i) => (
           <span key={i} className={`hero__particle hero__particle--${i + 1}`} />
         ))}
       </div>
