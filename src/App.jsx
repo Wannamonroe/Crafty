@@ -6,6 +6,7 @@ import AdminHome from './pages/admin/AdminHome';
 import UsersPage from './pages/admin/UsersPage';
 import GalleryManager from './pages/admin/GalleryManager';
 import GalleryPack from './pages/admin/GalleryPack';
+import CarouselManager from './pages/admin/CarouselManager';
 import FooterSettings from './pages/admin/FooterSettings';
 import AboutSettings from './pages/admin/AboutSettings';
 import './index.css';
@@ -20,6 +21,7 @@ function App() {
         <Route path="users" element={<UsersPage />} />
         <Route path="gallery" element={<GalleryManager />} />
         <Route path="gallery/:packId" element={<GalleryPack />} />
+        <Route path="carousel" element={<CarouselManager />} />
         <Route path="footer" element={<FooterSettings />} />
         <Route path="about" element={<AboutSettings />} />
       </Route>

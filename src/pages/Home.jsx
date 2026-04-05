@@ -1,7 +1,7 @@
 import '../index.css';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
-import QuoteCarousel from '../components/QuoteCarousel';
+import ImageCarousel from '../components/ImageCarousel';
 import Gallery from '../components/Gallery';
 import About from '../components/About';
 import Footer from '../components/Footer';
@@ -12,7 +12,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero id="home" />
-        <QuoteCarousel />
+        <ImageCarousel />
         <Gallery />
         <About />
       </main>

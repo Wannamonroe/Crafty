@@ -29,6 +29,15 @@ export default function AdminSidebar({ userRole }) {
               <span className="icon">🖼️</span> Galería
             </Link>
           </li>
+
+          <li>
+            <Link
+              to="/admin/carousel"
+              className={`sidebar-link ${location.pathname.includes('/admin/carousel') ? 'active' : ''}`}
+            >
+              <span className="icon">🎠</span> Carrusel
+            </Link>
+          </li>
           
           <li>
             <Link

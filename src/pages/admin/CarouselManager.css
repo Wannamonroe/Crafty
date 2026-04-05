@@ -1,0 +1,156 @@
+.carousel-manager-view {
+  padding: 30px;
+  background-color: var(--dark);
+  min-height: 100vh;
+  color: var(--white);
+}
+
+.carousel-header {
+  margin-bottom: 30px;
+}
+
+.carousel-header h1 {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+  color: var(--primary);
+}
+
+.subtitle {
+  color: var(--white-mute);
+  font-size: 1.1rem;
+}
+
+.upload-zone {
+  background: rgba(255, 255, 255, 0.05);
+  border: 4px dashed rgba(212, 175, 55, 0.2);
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  transition: all 0.3s ease;
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-zone.dragging {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: var(--primary);
+  transform: scale(1.02);
+}
+
+.upload-zone.uploading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.upload-zone input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.upload-text {
+  font-size: 1.25rem;
+  color: var(--white);
+  display: block;
+}
+
+.carousel-preview-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  border-bottom: 2px solid var(--primary);
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.carousel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.carousel-card {
+  background: #1a1a1a;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.carousel-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+.carousel-card__img {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  background: #000;
+}
+
+.carousel-card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Since carousel images might be different aspect ratios */
+}
+
+.carousel-card__actions {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reorder-btns {
+  display: flex;
+  gap: 10px;
+}
+
+.reorder-btns button {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.reorder-btns button:hover:not(:disabled) {
+  background: var(--primary);
+  transform: scale(1.1);
+}
+
+.reorder-btns button:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+.delete-btn {
+  background: rgba(255, 68, 68, 0.1);
+  border: 1px solid rgba(255, 68, 68, 0.3);
+  color: #ff4444;
+  border-radius: 8px;
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+  background: #ff4444;
+  color: white;
+}
+
+.empty-msg {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 50px;
+  color: var(--white-mute);
+  font-size: 1.2rem;
+  font-style: italic;
+}
