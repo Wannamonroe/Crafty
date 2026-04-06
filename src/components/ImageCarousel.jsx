@@ -4,7 +4,6 @@ import './ImageCarousel.css';
 
 export default function ImageCarousel() {
   const [images, setImages] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -26,47 +25,25 @@ export default function ImageCarousel() {
     fetchCarousel();
   }, []);
 
-  useEffect(() => {
-    if (images.length <= 1) return;
-
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 6000); // 6 seconds per slide
-
-    return () => clearInterval(interval);
-  }, [images]);
-
   if (loading || images.length === 0) return null;
 
+  // Function to render brand items
+  const renderItems = (classNameSuffix) => (
+    <div className={`marquee__group ${classNameSuffix}`} key={classNameSuffix}>
+      {images.map((image, index) => (
+        <div className="marquee__item" key={`${classNameSuffix}-${index}`}>
+          <img src={image.image_url} alt={`Brand logo ${index}`} className="marquee__logo" />
+        </div>
+      ))}
+    </div>
+  );
+
   return (
-    <section className="image-carousel">
-      <div className="image-carousel__container">
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className={`image-carousel__slide ${index === currentIndex ? 'active' : ''}`}
-            aria-hidden={index !== currentIndex}
-          >
-            <div 
-              className="image-carousel__image" 
-              style={{ backgroundImage: `url(${image.image_url})` }}
-            />
-          </div>
-        ))}
-        
-        {/* Decorative Overlay for depth */}
-        <div className="image-carousel__overlay" />
-        
-        {/* Dots indicators */}
-        <div className="image-carousel__indicators">
-          {images.map((_, index) => (
-            <button
-              key={index}
-              className={`indicator-dot ${index === currentIndex ? 'active' : ''}`}
-              onClick={() => setCurrentIndex(index)}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
+    <section className="image-marquee" aria-label="Brand reel">
+      <div className="marquee__mask">
+        <div className="marquee__content">
+          {renderItems('set-1')}
+          {renderItems('set-2')}
         </div>
       </div>
     </section>
