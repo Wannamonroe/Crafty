@@ -42,8 +42,11 @@ export default function ImageCarousel() {
     <section className="image-marquee" aria-label="Brand reel">
       <div className="marquee__mask">
         <div className="marquee__content">
+          {/* Render 4 sets to ensure no gaps even on ultra-wide screens */}
           {renderItems('set-1')}
           {renderItems('set-2')}
+          {renderItems('set-3')}
+          {renderItems('set-4')}
         </div>
       </div>
     </section>

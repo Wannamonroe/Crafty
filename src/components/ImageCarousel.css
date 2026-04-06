@@ -52,8 +52,6 @@
   display: flex;
   flex-shrink: 0;
   align-items: center;
-  gap: clamp(40px, 5vw, 80px);
-  padding: 0 40px;
 }
 
 .marquee__item {
@@ -64,6 +62,7 @@
   justify-content: center;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   padding: 10px;
+  margin-right: clamp(10px, 2vw, 30px); /* Fixed margin ensures consistent loop logic */
 }
 
 /* Scale individual item on hover */
@@ -89,7 +88,7 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%); /* Moves half the container (one full set of images) */
+    transform: translateX(-25%); /* Moves exactly one set width (out of four identically rendered sets) */
   }
 }
 
@@ -98,11 +97,7 @@
   .image-marquee {
     height: 120px;
   }
-  .marquee__group {
-    gap: 30px;
-    padding: 0 20px;
-  }
-  .scrollMarquee {
+  .marquee__content {
     animation-duration: 25s; /* Slightly faster on small screens due to shorter path */
   }
 }
