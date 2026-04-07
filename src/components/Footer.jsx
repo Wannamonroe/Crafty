@@ -119,10 +119,10 @@ export default function Footer() {
         </div>
 
         <div className="footer-modern__nav">
-          <a href="#galeria" className="footer-modern__link">GALERÍA</a>
-          <a href="#eventos" className="footer-modern__link">EVENTOS</a>
-          <a href="#nosotros" className="footer-modern__link">NOSOTROS</a>
-          <a href="#contacto" className="footer-modern__link">CONTACTO</a>
+          <a href="/#home" className="footer-modern__link">HOME</a>
+          <a href="/#gallery" className="footer-modern__link">GALLERY</a>
+          <a href="/#about" className="footer-modern__link">ABOUT US</a>
+          <a href="/apply" className="footer-modern__link">APPLY</a>
         </div>
 
         <div className="footer-modern__socials">
