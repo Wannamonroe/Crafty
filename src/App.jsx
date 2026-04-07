@@ -9,12 +9,15 @@ import GalleryPack from './pages/admin/GalleryPack';
 import CarouselManager from './pages/admin/CarouselManager';
 import FooterSettings from './pages/admin/FooterSettings';
 import AboutSettings from './pages/admin/AboutSettings';
+import Apply from './pages/Apply';
+import ApplySettings from './pages/admin/ApplySettings';
 import './index.css';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/apply" element={<Apply />} />
       <Route path="/admin/login" element={<Login />} />
       <Route path="/admin" element={<AdminDashboard />}>
         <Route index element={<AdminHome />} />
@@ -24,6 +27,7 @@ function App() {
         <Route path="carousel" element={<CarouselManager />} />
         <Route path="footer" element={<FooterSettings />} />
         <Route path="about" element={<AboutSettings />} />
+        <Route path="apply" element={<ApplySettings />} />
       </Route>
     </Routes>
   );

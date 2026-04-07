@@ -63,9 +63,9 @@ export default function Navbar() {
             </li>
           ))}
           <li>
-            <a href="#gallery" className="navbar__cta" onClick={() => handleNavClick('#gallery')}>
+            <Link to="/apply" className="navbar__cta" onClick={() => handleNavClick('apply')}>
               Apply
-            </a>
+            </Link>
           </li>
           <li>
             <Link to="/admin/login" className="navbar__admin-link" onClick={() => setMenuOpen(false)}>
