@@ -52,7 +52,8 @@
 
 .hero__mesh {
   position: absolute;
-  inset: -100px; /* Offset to allow drift without edge gaps */
+  inset: -100px;
+  /* Offset to allow drift without edge gaps */
   background-image:
     linear-gradient(rgba(212, 175, 55, .04) 1px, transparent 1px),
     linear-gradient(90deg, rgba(212, 175, 55, .04) 1px, transparent 1px);
@@ -86,7 +87,8 @@
   background: radial-gradient(circle, rgba(212, 175, 55, .20) 0%, rgba(212, 175, 55, 0.05) 50%, transparent 75%);
   top: -120px;
   left: -100px;
-  filter: blur(35px); /* Balanced: enough for softness, not too much for performance */
+  filter: blur(35px);
+  /* Balanced: enough for softness, not too much for performance */
   animation: orbFloat1 22s ease-in-out infinite alternate;
 }
 
@@ -236,7 +238,8 @@
   position: absolute;
   border-radius: 50%;
   background: rgba(212, 175, 55, 0.85);
-  box-shadow: 0 0 8px rgba(212, 175, 55, 0.4); /* Subtle sparkle sparkle sparkle! */
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+  /* Subtle sparkle sparkle sparkle! */
   animation: particleFloat linear infinite;
   opacity: 0;
   will-change: transform, opacity;
@@ -542,7 +545,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  z-index: 2;
+  z-index: 5;
   padding: 10px;
 }
 
@@ -703,5 +706,147 @@
 
   .hero__mesh {
     background-size: 40px 40px;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   FLOATING SOCIAL PILLS
+═══════════════════════════════════════════ */
+
+.hero-social-pill {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(18, 18, 18, 0.6);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  padding: 8px 16px 8px 8px;
+  border-radius: 40px;
+  text-decoration: none;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  animation: floatPill 6s ease-in-out infinite;
+}
+
+.hero-social-pill:hover {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: rgba(212, 175, 55, 0.8);
+  /* The normal transform comes from position/animation, but on hover we pop it further. 
+     Since animation runs, we wrap the pill content or manage transform carefully. 
+     Instead of overwriting transform, we add scale to it or rely on a wrapper, 
+     but overriding transform might snap the animation. 
+     Let's override transform with !important to freeze it on hover if preferred, 
+     or just use a wrapper for the animation. For now, simple override: */
+  transform: translateY(-5px) scale(1.05) !important;
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+  animation-play-state: paused;
+}
+
+.hero-social-pill__icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.hero-social-icon {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-social-pill__label {
+  white-space: nowrap;
+}
+
+@keyframes floatPill {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Positions relative to .hero__logo-wrapper */
+.hero-social--top-left {
+  top: 15%;
+  left: -9%;
+  animation-delay: 0s;
+}
+
+.hero-social--top-right {
+  top: 10%;
+  right: -10%;
+  animation-delay: 1.5s;
+}
+
+.hero-social--bottom-left {
+  bottom: 25%;
+  left: -5%;
+  animation-delay: 0.7s;
+}
+
+.hero-social--bottom-right {
+  bottom: 20%;
+  right: -6%;
+  animation-delay: 2.2s;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .hero-social-pill {
+    padding: 6px;
+    font-size: 0.75rem;
+  }
+
+  .hero-social-pill__icon {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-social-pill__label {
+    display: none;
+  }
+
+  .hero-social-pill {
+    padding: 8px;
+    border-radius: 50%;
+  }
+
+  .hero-social--top-left {
+    top: -10%;
+    left: 10%;
+  }
+
+  .hero-social--top-right {
+    top: -10%;
+    right: 10%;
+  }
+
+  .hero-social--bottom-left {
+    bottom: -10%;
+    left: 10%;
+  }
+
+  .hero-social--bottom-right {
+    bottom: -10%;
+    right: 10%;
   }
 }
