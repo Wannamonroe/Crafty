@@ -60,13 +60,7 @@ function SortableImageCard({ image, handleUpdateImage, handleDeleteImage }) {
           placeholder="URL del sitio (Second Life)"
           className="image-input"
         />
-        <input 
-          type="text" 
-          value={image.button_text || ''} 
-          onChange={(e) => handleUpdateImage(image.id, 'button_text', e.target.value)}
-          placeholder="Texto del botón (Opcional)"
-          className="image-input"
-        />
+
         <button className="btn-delete-image" onClick={(e) => { e.preventDefault(); handleDeleteImage(image.id, image.image_url); }}>
           🗑️ Borrar
         </button>

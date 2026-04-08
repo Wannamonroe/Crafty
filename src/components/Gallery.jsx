@@ -8,20 +8,25 @@ export default function Gallery() {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [galleryTitle, setGalleryTitle] = useState('Galería');
+  const [galleryButtonText, setGalleryButtonText] = useState('Visitar Sitio');
 
   useEffect(() => {
     fetchActiveGallery();
-    fetchGalleryTitle();
+    fetchGallerySettings();
   }, []);
 
-  async function fetchGalleryTitle() {
+  async function fetchGallerySettings() {
     try {
       const { data, error } = await supabase
         .from('site_settings')
-        .select('value')
-        .eq('key', 'gallery_title')
-        .single();
-      if (!error && data?.value) setGalleryTitle(data.value);
+        .select('key, value')
+        .in('key', ['gallery_title', 'gallery_button_text']);
+      if (!error && data) {
+        const titleSetting = data.find(s => s.key === 'gallery_title');
+        const btnSetting = data.find(s => s.key === 'gallery_button_text');
+        if (titleSetting?.value) setGalleryTitle(titleSetting.value);
+        if (btnSetting?.value) setGalleryButtonText(btnSetting.value);
+      }
     } catch (_) { }
   }
 
@@ -93,7 +98,7 @@ export default function Gallery() {
                     className="btn-visit-site-elegant"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <span>📍{item.button_text && item.button_text.trim() !== '' ? item.button_text : 'Visitar Sitio'}</span>
+                    <span>📍{galleryButtonText}</span>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>

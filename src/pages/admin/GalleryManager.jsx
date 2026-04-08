@@ -8,46 +8,62 @@ export default function GalleryManager() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Gallery title
+  // Gallery Settings
   const [galleryTitle, setGalleryTitle] = useState('Galería');
-  const [titleModalOpen, setTitleModalOpen] = useState(false);
+  const [galleryButtonText, setGalleryButtonText] = useState('Visitar Sitio');
+
+  // Modals state
+  const [settingsModalOpen, setSettingsModalOpen] = useState(false);
   const [titleInput, setTitleInput] = useState('');
-  const [titleSaving, setTitleSaving] = useState(false);
+  const [buttonInput, setButtonInput] = useState('');
+  const [settingsSaving, setSettingsSaving] = useState(false);
 
   useEffect(() => {
     fetchPacks();
-    fetchGalleryTitle();
+    fetchGallerySettings();
   }, []);
 
-  async function fetchGalleryTitle() {
+  async function fetchGallerySettings() {
     try {
       const { data, error } = await supabase
         .from('site_settings')
-        .select('value')
-        .eq('key', 'gallery_title')
-        .single();
-      if (!error && data?.value) setGalleryTitle(data.value);
+        .select('key, value')
+        .in('key', ['gallery_title', 'gallery_button_text']);
+
+      if (!error && data) {
+        const titleSetting = data.find(s => s.key === 'gallery_title');
+        const btnSetting = data.find(s => s.key === 'gallery_button_text');
+        
+        if (titleSetting?.value) setGalleryTitle(titleSetting.value);
+        if (btnSetting?.value) setGalleryButtonText(btnSetting.value);
+      }
     } catch (_) {}
   }
 
-  async function handleSaveGalleryTitle() {
-    if (!titleInput.trim()) return;
-    setTitleSaving(true);
+  async function handleSaveGallerySettings() {
+    if (!titleInput.trim() || !buttonInput.trim()) return;
+    setSettingsSaving(true);
+
     try {
+      const updates = [
+        { key: 'gallery_title', value: titleInput.trim(), updated_at: new Date().toISOString() },
+        { key: 'gallery_button_text', value: buttonInput.trim(), updated_at: new Date().toISOString() }
+      ];
+
       const { error } = await supabase
         .from('site_settings')
-        .upsert(
-          { key: 'gallery_title', value: titleInput.trim(), updated_at: new Date().toISOString() },
-          { onConflict: 'key' }
-        );
+        .upsert(updates, { onConflict: 'key' });
+
       if (error) throw error;
+
       setGalleryTitle(titleInput.trim());
-      setTitleModalOpen(false);
+      setGalleryButtonText(buttonInput.trim());
+      setSettingsModalOpen(false);
     } catch (err) {
-      console.error('Error guardando título:', err);
-      alert('Error al guardar el título.');
+      console.error('Error guardando configuración:', err);
+      alert('Error al guardar la configuración.');
     } finally {
-      setTitleSaving(false);
+      setSettingsSaving(false);
     }
   }
 
@@ -171,11 +187,16 @@ export default function GalleryManager() {
           <h1>Gestor de Galería</h1>
           <div className="gallery-title-row">
             <span className="gallery-title-preview">Título público: <strong>{galleryTitle}</strong></span>
+            <span className="gallery-title-preview" style={{marginLeft: '15px'}}>Botón: <strong>{galleryButtonText}</strong></span>
             <button
               className="btn-change-title"
-              onClick={() => { setTitleInput(galleryTitle); setTitleModalOpen(true); }}
+              onClick={() => { 
+                setTitleInput(galleryTitle);
+                setButtonInput(galleryButtonText);
+                setSettingsModalOpen(true); 
+              }}
             >
-              ✏️ Cambiar título de galería
+              ⚙️ Configurar Galería
             </button>
           </div>
         </div>
@@ -184,37 +205,57 @@ export default function GalleryManager() {
         </button>
       </div>
 
-      {/* Modal cambiar título */}
-      {titleModalOpen && (
-        <div className="title-modal-overlay" onClick={() => setTitleModalOpen(false)}>
+      {/* Modal configuración galería */}
+      {settingsModalOpen && (
+        <div className="title-modal-overlay" onClick={() => setSettingsModalOpen(false)}>
           <div className="title-modal" onClick={(e) => e.stopPropagation()}>
-            <h2 className="title-modal__heading">Cambiar título de galería</h2>
-            <p className="title-modal__hint">Este título aparece en la página principal, encima de las fotos.</p>
-            <input
-              id="gallery-title-input"
-              type="text"
-              className="title-modal__input"
-              value={titleInput}
-              onChange={(e) => setTitleInput(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSaveGalleryTitle()}
-              placeholder="Ej: Galería, Colección, Lookbook..."
-              autoFocus
-              maxLength={80}
-            />
+            <h2 className="title-modal__heading">Configuración de Galería</h2>
+            <p className="title-modal__hint">Modifica el título principal y el texto de los botones.</p>
+            
+            <div style={{ marginBottom: '15px' }}>
+              <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Título de la Galería:</label>
+              <input
+                id="gallery-title-input"
+                type="text"
+                className="title-modal__input"
+                value={titleInput}
+                onChange={(e) => setTitleInput(e.target.value)}
+                placeholder="Ej: Galería, Colección, Lookbook..."
+                autoFocus
+                maxLength={80}
+                style={{ marginBottom: '0' }}
+              />
+            </div>
+            
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Texto de todos los botones "Visitar":</label>
+              <input
+                id="gallery-button-input"
+                type="text"
+                className="title-modal__input"
+                value={buttonInput}
+                onChange={(e) => setButtonInput(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSaveGallerySettings()}
+                placeholder="Ej: Visitar Sitio, Comprar, Ver más..."
+                maxLength={80}
+                style={{ marginBottom: '0' }}
+              />
+            </div>
+            
             <div className="title-modal__actions">
               <button
                 className="title-modal__cancel"
-                onClick={() => setTitleModalOpen(false)}
-                disabled={titleSaving}
+                onClick={() => setSettingsModalOpen(false)}
+                disabled={settingsSaving}
               >
                 Cancelar
               </button>
               <button
                 className="title-modal__save"
-                onClick={handleSaveGalleryTitle}
-                disabled={titleSaving || !titleInput.trim()}
+                onClick={handleSaveGallerySettings}
+                disabled={settingsSaving || !titleInput.trim() || !buttonInput.trim()}
               >
-                {titleSaving ? 'Guardando...' : '💾 Guardar'}
+                {settingsSaving ? 'Guardando...' : '💾 Guardar'}
               </button>
             </div>
           </div>
