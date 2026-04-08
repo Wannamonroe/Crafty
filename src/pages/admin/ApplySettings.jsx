@@ -2,15 +2,17 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabase';
 import './ApplySettings.css';
 
+const DEFAULT_APPLY_TITLE = "Join the Collective";
 const DEFAULT_APPLY_TEXT = "Are you a creator? Join us as a designer and showcase your creations in our exclusive event. Perfect for fashion designers, accessory creators, and visual artists";
 const DEFAULT_APPLY_URL = "https://forms.gle/";
 
 export default function ApplySettings() {
+  const [applyTitle, setApplyTitle] = useState(DEFAULT_APPLY_TITLE);
   const [applyText, setApplyText] = useState(DEFAULT_APPLY_TEXT);
   const [applyUrl, setApplyUrl] = useState(DEFAULT_APPLY_URL);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [status, setStatus] = useState(null); // 'success' | 'error'
+  const [status, setStatus] = useState(null);
 
   useEffect(() => {
     fetchSettings();
@@ -22,10 +24,11 @@ export default function ApplySettings() {
       const { data, error } = await supabase
         .from('site_settings')
         .select('key, value')
-        .in('key', ['apply_text', 'apply_url']);
+        .in('key', ['apply_title', 'apply_text', 'apply_url']);
 
       if (!error && data) {
         data.forEach(({ key, value }) => {
+          if (key === 'apply_title' && value) setApplyTitle(value);
           if (key === 'apply_text' && value) setApplyText(value);
           if (key === 'apply_url' && value) setApplyUrl(value);
         });
@@ -44,6 +47,7 @@ export default function ApplySettings() {
       const { error } = await supabase
         .from('site_settings')
         .upsert([
+          { key: 'apply_title', value: applyTitle.trim(), updated_at: new Date().toISOString() },
           { key: 'apply_text', value: applyText.trim(), updated_at: new Date().toISOString() },
           { key: 'apply_url', value: applyUrl.trim(), updated_at: new Date().toISOString() },
         ], { onConflict: 'key' });
@@ -61,6 +65,7 @@ export default function ApplySettings() {
 
   function handleReset() {
     if (!window.confirm('¿Restaurar los valores por defecto?')) return;
+    setApplyTitle(DEFAULT_APPLY_TITLE);
     setApplyText(DEFAULT_APPLY_TEXT);
     setApplyUrl(DEFAULT_APPLY_URL);
   }
@@ -83,11 +88,26 @@ export default function ApplySettings() {
       <form className="apply-settings-form" onSubmit={handleSave}>
         <div className="apply-settings-preview">
           <span className="apply-settings-preview__label">Vista previa del mensaje</span>
+          <h2 className="apply-settings-preview__title">{applyTitle || 'Título de Apply'}</h2>
           <p className="apply-settings-preview__text">{applyText || 'Escribe algo...'}</p>
           <div className="apply-settings-preview__link">URL: <span className="url-text">{applyUrl}</span></div>
         </div>
 
         <div className="apply-settings-fields">
+          <div className="apply-settings-field">
+            <label htmlFor="apply-title" className="apply-settings-field__label">
+              Título del apartado
+            </label>
+            <input
+              id="apply-title"
+              type="text"
+              className="apply-settings-field__input"
+              value={applyTitle}
+              onChange={(e) => setApplyTitle(e.target.value)}
+              placeholder="Join the Collective"
+              required
+            />
+          </div>
           <div className="apply-settings-field">
             <label htmlFor="apply-text" className="apply-settings-field__label">
               Texto descriptivo

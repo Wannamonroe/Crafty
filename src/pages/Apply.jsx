@@ -4,10 +4,12 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import './Apply.css';
 
+const DEFAULT_APPLY_TITLE = "Join the Collective";
 const DEFAULT_APPLY_TEXT = "Are you a creator? Join us as a designer and showcase your creations in our exclusive event. Perfect for fashion designers, accessory creators, and visual artists";
 const DEFAULT_APPLY_URL = "https://forms.gle/"; // Placeholder
 
 export default function Apply() {
+  const [applyTitle, setApplyTitle] = useState(DEFAULT_APPLY_TITLE);
   const [applyText, setApplyText] = useState(DEFAULT_APPLY_TEXT);
   const [applyUrl, setApplyUrl] = useState(DEFAULT_APPLY_URL);
   const [loading, setLoading] = useState(true);
@@ -18,10 +20,11 @@ export default function Apply() {
         const { data, error } = await supabase
           .from('site_settings')
           .select('key, value')
-          .in('key', ['apply_text', 'apply_url']);
+          .in('key', ['apply_title', 'apply_text', 'apply_url']);
 
         if (!error && data) {
           data.forEach(item => {
+            if (item.key === 'apply_title' && item.value) setApplyTitle(item.value);
             if (item.key === 'apply_text' && item.value) setApplyText(item.value);
             if (item.key === 'apply_url' && item.value) setApplyUrl(item.value);
           });
@@ -44,7 +47,7 @@ export default function Apply() {
       <main className="apply-content">
         <div className="apply-container">
           <div className="apply-card">
-            <h1 className="apply-title">Join the Collective</h1>
+            <h1 className="apply-title">{applyTitle}</h1>
             <div className="apply-divider"></div>
             
             {loading ? (

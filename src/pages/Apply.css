@@ -1,7 +1,7 @@
 .apply-page {
   min-height: 100vh;
-  background-color: #0d0d0d;
-  color: #fff;
+  background-color: var(--bg-color);
+  color: var(--white);
   display: flex;
   flex-direction: column;
 }
@@ -12,8 +12,8 @@
   justify-content: center;
   align-items: center;
   padding: 100px 20px;
-  background: radial-gradient(circle at top right, rgba(122, 137, 115, 0.1), transparent),
-              radial-gradient(circle at bottom left, rgba(122, 137, 115, 0.05), transparent);
+  background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.05), transparent),
+              radial-gradient(circle at bottom left, rgba(212, 175, 55, 0.02), transparent);
 }
 
 .apply-container {
@@ -33,27 +33,28 @@
 }
 
 .apply-title {
-  font-family: 'Outfit', sans-serif;
-  font-size: 3rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 400;
   margin-bottom: 20px;
-  color: #eaeaea;
+  color: var(--white);
   letter-spacing: -0.02em;
+  font-style: italic;
 }
 
 .apply-divider {
   width: 60px;
-  height: 4px;
-  background-color: #7a8973;
+  height: 2px;
+  background-color: var(--primary);
   margin: 0 auto 40px;
   border-radius: 2px;
 }
 
 .apply-description {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   font-size: 1.25rem;
   line-height: 1.6;
-  color: #888;
+  color: var(--gray);
   margin-bottom: 50px;
   max-width: 600px;
   margin-left: auto;
@@ -65,21 +66,25 @@
   align-items: center;
   justify-content: center;
   gap: 15px;
-  background-color: #7a8973;
-  color: #fff;
+  background-color: var(--primary);
+  color: var(--white);
   text-decoration: none;
   padding: 18px 45px;
-  border-radius: 50px;
+  border-radius: 4px;
+  font-family: var(--font-body);
   font-weight: 600;
-  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 1rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 10px 20px rgba(122, 137, 115, 0.25);
+  box-shadow: 0 10px 20px rgba(212, 175, 55, 0.15);
 }
 
 .apply-button:hover {
   transform: translateY(-5px) scale(1.02);
-  background-color: #8a9b83;
-  box-shadow: 0 15px 30px rgba(122, 137, 115, 0.4);
+  background-color: var(--white);
+  color: var(--dark);
+  box-shadow: 0 15px 30px rgba(212, 175, 55, 0.25);
 }
 
 .apply-button__icon {
