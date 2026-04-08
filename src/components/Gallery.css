@@ -88,42 +88,43 @@
   transform: scale(1.05);
 }
 
-.lookbook__overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+.lookbook__action {
+  margin-top: 16px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  width: 100%;
 }
 
-.lookbook__item:hover .lookbook__overlay {
-  opacity: 1;
-}
-
-.btn-visit-site {
-  background-color: var(--primary);
-  color: var(--white);
-  padding: 12px 24px;
-  border-radius: 4px;
-  text-decoration: none;
+.btn-visit-site-elegant {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--primary);
   font-family: var(--font-body);
+  font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  transition: background-color 0.2s, transform 0.2s;
-  border: 1px solid rgba(255,255,255,0.2);
+  text-decoration: none;
+  padding: 10px 24px;
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  background-color: transparent;
 }
 
-.btn-visit-site:hover {
-  background-color: var(--white);
+.btn-visit-site-elegant svg {
+  transition: transform 0.3s ease;
+}
+
+.btn-visit-site-elegant:hover {
+  background-color: var(--primary);
   color: var(--bg-color);
-  transform: scale(1.05);
+  transform: translateY(-2px);
+}
+
+.btn-visit-site-elegant:hover svg {
+  transform: translateX(4px);
 }
 
 .gallery-loading, .gallery-empty {
