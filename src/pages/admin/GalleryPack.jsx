@@ -2,7 +2,71 @@ import { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 import imageCompression from 'browser-image-compression';
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  rectSortingStrategy,
+  useSortable,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 import './GalleryPack.css';
+
+function SortableImageCard({ image, handleUpdateImage, handleDeleteImage }) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging
+  } = useSortable({ id: image.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    zIndex: isDragging ? 99 : 'auto',
+    opacity: isDragging ? 0.8 : 1,
+  };
+
+  return (
+    <div ref={setNodeRef} style={style} className={`image-card ${isDragging ? 'shadow-lg' : ''}`}>
+      <div className="drag-handle" {...attributes} {...listeners} title="Arrastrar para reordenar">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="12" r="1"></circle><circle cx="9" cy="5" r="1"></circle><circle cx="9" cy="19" r="1"></circle><circle cx="15" cy="12" r="1"></circle><circle cx="15" cy="5" r="1"></circle><circle cx="15" cy="19" r="1"></circle></svg>
+      </div>
+      <div className="image-preview">
+        <img src={image.image_url} alt={image.name} loading="lazy" />
+      </div>
+      <div className="image-details">
+        <input 
+          type="text" 
+          value={image.name} 
+          onChange={(e) => handleUpdateImage(image.id, 'name', e.target.value)}
+          placeholder="Nombre de imagen"
+          className="image-input"
+        />
+        <input 
+          type="url" 
+          value={image.site_url || ''} 
+          onChange={(e) => handleUpdateImage(image.id, 'site_url', e.target.value)}
+          placeholder="URL del sitio (Second Life)"
+          className="image-input"
+        />
+        <button className="btn-delete-image" onClick={(e) => { e.preventDefault(); handleDeleteImage(image.id, image.image_url); }}>
+          🗑️ Borrar
+        </button>
+      </div>
+    </div>
+  );
+}
 
 export default function GalleryPack() {
   const { packId } = useParams();
@@ -178,6 +242,53 @@ export default function GalleryPack() {
     }
   };
 
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 5,
+      },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  const handleDragEnd = async (event) => {
+    const { active, over } = event;
+    
+    if (over && active.id !== over.id) {
+      setImages((items) => {
+        const oldIndex = items.findIndex((i) => i.id === active.id);
+        const newIndex = items.findIndex((i) => i.id === over.id);
+        const newArray = arrayMove(items, oldIndex, newIndex);
+        
+        // Background DB Update
+        setTimeout(async () => {
+          try {
+            const now = new Date().getTime();
+            for (let i = 0; i < newArray.length; i++) {
+              const image = newArray[i];
+              // El más arriba tendrá un created_at más reciente (now - i * 1000)
+              const newDate = new Date(now - i * 1000).toISOString();
+              
+              const { error } = await supabase
+                .from('gallery_images')
+                .update({ created_at: newDate })
+                .eq('id', image.id);
+              
+              if (error) console.error("Error order:", error);
+            }
+          } catch (e) {
+            console.error("Error updating order timestamps:", e);
+          }
+        }, 0);
+        
+        return newArray;
+      });
+    }
+  };
+
+
   if (loading) return <div className="gallery-pack-view"><p>Cargando pack...</p></div>;
   if (!pack) return <div className="gallery-pack-view"><p>No se encontró el pack.</p></div>;
 
@@ -218,34 +329,24 @@ export default function GalleryPack() {
 
       <div className="images-section">
         <h2>Imágenes del Pack ({images.length})</h2>
-        <div className="images-grid">
-          {images.map(image => (
-            <div key={image.id} className="image-card">
-              <div className="image-preview">
-                <img src={image.image_url} alt={image.name} loading="lazy" />
-              </div>
-              <div className="image-details">
-                <input 
-                  type="text" 
-                  value={image.name} 
-                  onChange={(e) => handleUpdateImage(image.id, 'name', e.target.value)}
-                  placeholder="Nombre de imagen"
-                  className="image-input"
+        <DndContext 
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
+        >
+          <div className="images-grid">
+            <SortableContext items={images} strategy={rectSortingStrategy}>
+              {images.map(image => (
+                <SortableImageCard 
+                  key={image.id}
+                  image={image}
+                  handleUpdateImage={handleUpdateImage}
+                  handleDeleteImage={handleDeleteImage}
                 />
-                <input 
-                  type="url" 
-                  value={image.site_url || ''} 
-                  onChange={(e) => handleUpdateImage(image.id, 'site_url', e.target.value)}
-                  placeholder="URL del sitio (Second Life)"
-                  className="image-input"
-                />
-                <button className="btn-delete-image" onClick={() => handleDeleteImage(image.id, image.image_url)}>
-                  🗑️ Borrar
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+              ))}
+            </SortableContext>
+          </div>
+        </DndContext>
       </div>
     </div>
   );
