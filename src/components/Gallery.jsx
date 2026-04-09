@@ -4,7 +4,7 @@ import './Gallery.css';
 
 export default function Gallery() {
   const [hoveredId, setHoveredId] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [galleryTitle, setGalleryTitle] = useState('Galería');
@@ -14,6 +14,17 @@ export default function Gallery() {
     fetchActiveGallery();
     fetchGallerySettings();
   }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (selectedImageIndex === null) return;
+      if (e.key === 'ArrowRight') handleNextImage(e);
+      if (e.key === 'ArrowLeft') handlePrevImage(e);
+      if (e.key === 'Escape') setSelectedImageIndex(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImageIndex, images.length]);
 
   async function fetchGallerySettings() {
     try {
@@ -64,6 +75,20 @@ export default function Gallery() {
     }
   }
 
+  const handlePrevImage = (e) => {
+    e.stopPropagation();
+    if (selectedImageIndex !== null) {
+      setSelectedImageIndex(selectedImageIndex === 0 ? images.length - 1 : selectedImageIndex - 1);
+    }
+  };
+
+  const handleNextImage = (e) => {
+    e.stopPropagation();
+    if (selectedImageIndex !== null) {
+      setSelectedImageIndex(selectedImageIndex === images.length - 1 ? 0 : selectedImageIndex + 1);
+    }
+  };
+
   return (
     <section className="lookbook" id="gallery">
       <div className="lookbook__header">
@@ -76,14 +101,14 @@ export default function Gallery() {
           <p className="gallery-empty">No hay imágenes en la galería actualmente.</p>
         )}
 
-        {!loading && images.map((item) => (
+        {!loading && images.map((item, index) => (
           <article
             key={item.id}
             className="lookbook__item"
             onMouseEnter={() => setHoveredId(item.id)}
             onMouseLeave={() => setHoveredId(null)}
           >
-            <div className="lookbook__image-wrap" onClick={() => setSelectedImage(item.image_url)}>
+            <div className="lookbook__image-wrap" onClick={() => setSelectedImageIndex(index)}>
               <img src={item.image_url} alt={item.name} className="lookbook__image" loading="lazy" />
 
             </div>
@@ -111,15 +136,21 @@ export default function Gallery() {
       </div>
 
       {/* Modal / Lightbox */}
-      {selectedImage && (
-        <div className="gallery-modal" onClick={() => setSelectedImage(null)}>
+      {selectedImageIndex !== null && (
+        <div className="gallery-modal" onClick={() => setSelectedImageIndex(null)}>
           <span className="gallery-modal-close">&times;</span>
+          <button className="gallery-modal-nav gallery-modal-prev" onClick={handlePrevImage}>
+            &#10094;
+          </button>
           <img
-            src={selectedImage}
+            src={images[selectedImageIndex]?.image_url}
             alt="Visor de imagen"
             className="gallery-modal-content"
             onClick={(e) => e.stopPropagation()}
           />
+          <button className="gallery-modal-nav gallery-modal-next" onClick={handleNextImage}>
+            &#10095;
+          </button>
         </div>
       )}
     </section>
