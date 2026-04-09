@@ -16,7 +16,7 @@ function FacebookIcon() {
   return (
     <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" className="social-logo">
       {/* Fondo azul que rellena todo el viewBox — el contenedor lo recorta con border-radius */}
-      <rect width="36" height="36" fill="#1877F2"/>
+      <rect width="36" height="36" fill="#1877F2" />
       {/* "f" limpia y bien centrada */}
       <path
         fill="#fff"
@@ -30,18 +30,18 @@ function InworldIcon() {
   /* Inworld AI logo — stylised "i" in a rounded square */
   return (
     <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" className="social-logo">
-      <rect width="36" height="36" rx="10" fill="#111"/>
-      <rect width="36" height="36" rx="10" fill="url(#iw_grad)"/>
+      <rect width="36" height="36" rx="10" fill="#111" />
+      <rect width="36" height="36" rx="10" fill="url(#iw_grad)" />
       {/* Globe rings */}
-      <circle cx="18" cy="18" r="9.5" stroke="#fff" strokeWidth="1.4" fill="none"/>
-      <ellipse cx="18" cy="18" rx="4.5" ry="9.5" stroke="#fff" strokeWidth="1.4" fill="none"/>
-      <line x1="8.5" y1="18" x2="27.5" y2="18" stroke="#fff" strokeWidth="1.4"/>
-      <line x1="10" y1="13" x2="26" y2="13" stroke="#fff" strokeWidth="1" opacity="0.6"/>
-      <line x1="10" y1="23" x2="26" y2="23" stroke="#fff" strokeWidth="1" opacity="0.6"/>
+      <circle cx="18" cy="18" r="9.5" stroke="#fff" strokeWidth="1.4" fill="none" />
+      <ellipse cx="18" cy="18" rx="4.5" ry="9.5" stroke="#fff" strokeWidth="1.4" fill="none" />
+      <line x1="8.5" y1="18" x2="27.5" y2="18" stroke="#fff" strokeWidth="1.4" />
+      <line x1="10" y1="13" x2="26" y2="13" stroke="#fff" strokeWidth="1" opacity="0.6" />
+      <line x1="10" y1="23" x2="26" y2="23" stroke="#fff" strokeWidth="1" opacity="0.6" />
       <defs>
         <linearGradient id="iw_grad" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#6C3BFF"/>
-          <stop offset="1" stopColor="#3B82F6"/>
+          <stop stopColor="#6C3BFF" />
+          <stop offset="1" stopColor="#3B82F6" />
         </linearGradient>
       </defs>
     </svg>
@@ -52,7 +52,7 @@ function SeraphimIcon() {
   /* Seraphim — stylised feathered wing / "S" mark */
   return (
     <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" className="social-logo">
-      <rect width="36" height="36" rx="10" fill="url(#sr_grad)"/>
+      <rect width="36" height="36" rx="10" fill="url(#sr_grad)" />
       {/* Left wing */}
       <path
         d="M18 26 C14 22, 8 20, 9 14 C10 10, 14 10, 16 13 C12 13, 11 16, 13 18 C15 20, 17 20, 18 26Z"
@@ -64,11 +64,11 @@ function SeraphimIcon() {
         fill="rgba(255,255,255,0.9)"
       />
       {/* Center body / halo dot */}
-      <circle cx="18" cy="12" r="2" fill="#fff"/>
+      <circle cx="18" cy="12" r="2" fill="#fff" />
       <defs>
         <linearGradient id="sr_grad" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#C026D3"/>
-          <stop offset="1" stopColor="#7C3AED"/>
+          <stop stopColor="#C026D3" />
+          <stop offset="1" stopColor="#7C3AED" />
         </linearGradient>
       </defs>
     </svg>
@@ -78,10 +78,10 @@ function SeraphimIcon() {
 /* ── Social button data ────────────────────────────────────────────────── */
 
 const SOCIAL_BUTTONS = [
-  { key: 'footer_facebook_album',  label: 'Facebook Album',  Icon: FacebookIcon },
-  { key: 'footer_facebook_group',  label: 'Facebook Group',  Icon: FacebookIcon },
-  { key: 'footer_inworld_group',   label: 'Inworld Group',   Icon: InworldIcon  },
-  { key: 'footer_seraphim_gallery',label: 'Seraphim Gallery',Icon: SeraphimIcon },
+  { key: 'footer_facebook_album', label: 'Facebook Album', Icon: FacebookIcon },
+  { key: 'footer_facebook_group', label: 'Facebook Group', Icon: FacebookIcon },
+  { key: 'footer_inworld_group', label: 'Inworld Group', Icon: InworldIcon },
+  { key: 'footer_seraphim_gallery', label: 'Seraphim Gallery', Icon: SeraphimIcon },
 ];
 
 /* ── Component ─────────────────────────────────────────────────────────── */
@@ -144,7 +144,7 @@ export default function Footer() {
 
         <div className="footer-modern__bottom">
           <span className="footer-modern__copy">&copy; {new Date().getFullYear()} CRAFTY. ALL RIGHTS RESERVED.</span>
-          <span className="footer-modern__credits">DESIGNED FOR SECOND LIFE</span>
+          <span className="footer-modern__credits"></span>
         </div>
 
       </div>
