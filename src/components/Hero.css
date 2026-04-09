@@ -524,7 +524,7 @@
 }
 
 .hero__title {
-  font-family: var(--font-display);
+  font-family: "Playfair Display", serif;
   font-size: clamp(3.5rem, 7vw, 6rem);
   font-weight: 500;
   line-height: 1;
