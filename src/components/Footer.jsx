@@ -115,7 +115,7 @@ export default function Footer() {
 
         <div className="footer-modern__brand">
           <img src={craftyLogo} alt="Crafty Logo" className="footer-modern__logo" />
-          <p className="footer-modern__tagline">DIGITAL COUTURE &amp; VIRTUAL ELEGANCE</p>
+          <p className="footer-modern__tagline">Crafted with Love, Priced for You</p>
         </div>
 
         <div className="footer-modern__nav">
