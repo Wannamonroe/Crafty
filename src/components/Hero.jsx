@@ -94,6 +94,14 @@ export default function Hero() {
     }
     fetchLinks();
   }, []);
+
+  const currentDay = new Date().getDay();
+  // 0: Domingo, 1: Lunes, 2: Martes, 3: Miércoles, 4: Jueves, 5: Viernes, 6: Sábado
+  // Verde: Viernes a Lunes (5, 6, 0, 1)
+  // Amarillo: Martes a Jueves (2, 3, 4)
+  const isGreen = [5, 6, 0, 1].includes(currentDay);
+  const dotColorClass = isGreen ? 'hero__badge-dot--green' : 'hero__badge-dot--yellow';
+
   return (
     <section className="hero" id="home">
 
@@ -124,7 +132,7 @@ export default function Hero() {
       {/* ── Content ────────────────────────────────────────────── */}
       <div className="hero__container">
         <div className="hero__top-badge">
-          <span className="hero__badge-dot"></span>
+          <span className={`hero__badge-dot ${dotColorClass}`}></span>
           AVAILABLE EVERY FRIDAY AT 08 AM SLT
         </div>
 

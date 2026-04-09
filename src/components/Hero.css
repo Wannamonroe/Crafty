@@ -484,10 +484,18 @@
 .hero__badge-dot {
   width: 6px;
   height: 6px;
-  background-color: #4ade80; /* Verde brillante */
   border-radius: 50%;
-  box-shadow: 0 0 10px #4ade80;
   animation: pulseDot 2s infinite;
+}
+
+.hero__badge-dot--green {
+  background-color: #4ade80;
+  box-shadow: 0 0 10px #4ade80;
+}
+
+.hero__badge-dot--yellow {
+  background-color: #facc15;
+  box-shadow: 0 0 10px #facc15;
 }
 
 @keyframes pulseDot {
