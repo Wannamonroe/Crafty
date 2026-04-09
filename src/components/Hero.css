@@ -484,9 +484,9 @@
 .hero__badge-dot {
   width: 6px;
   height: 6px;
-  background-color: var(--primary);
+  background-color: #4ade80; /* Verde brillante */
   border-radius: 50%;
-  box-shadow: 0 0 10px var(--primary);
+  box-shadow: 0 0 10px #4ade80;
   animation: pulseDot 2s infinite;
 }
 
