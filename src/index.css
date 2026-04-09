@@ -13,7 +13,9 @@
   --white: #ffffff;
 
   --font-body: "Outfit", sans-serif;
-  --font-display: "Playfair Display", serif;
+  --font-display: "Outfit", sans-serif;
+  --font-primary: "Outfit", sans-serif;
+  --font-heading: "Outfit", sans-serif;
 }
 
 *,
