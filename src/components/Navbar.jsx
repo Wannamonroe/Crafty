@@ -62,6 +62,10 @@ export default function Navbar() {
           <img src={logo} alt="Crafty Logo" className="navbar__logo" />
         </Link>
 
+        <div className="navbar__slogan">
+          <span>CRAFTED WITH LOVE, PRICED FOR YOU</span>
+        </div>
+
         <ul className={`navbar__links ${menuOpen ? 'navbar__links--open' : ''}`}>
           {navLinks.map((link) => {
             const section = link.href.split('#')[1];
