@@ -117,9 +117,10 @@ export default function GalleryPack() {
     
     // Compression options
     const options = {
-      maxSizeMB: 1, // Max 1MB
+      maxSizeMB: 0.25, // Max 250KB
       maxWidthOrHeight: 1080, // Target around 1080px to save space but keep quality
-      useWebWorker: true
+      useWebWorker: true,
+      fileType: 'image/webp'
     };
 
     try {

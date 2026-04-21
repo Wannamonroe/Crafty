@@ -32,7 +32,7 @@ export default function ImageCarousel() {
     <div className={`marquee__group ${classNameSuffix}`} key={classNameSuffix}>
       {images.map((image, index) => (
         <div className="marquee__item" key={`${classNameSuffix}-${index}`}>
-          <img src={image.image_url} alt={`Brand logo ${index}`} className="marquee__logo" />
+          <img src={image.image_url} alt={`Brand logo ${index}`} className="marquee__logo" loading="lazy" />
         </div>
       ))}
     </div>

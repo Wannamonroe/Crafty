@@ -36,9 +36,10 @@ export default function CarouselManager() {
     setUploading(true);
 
     const options = {
-      maxSizeMB: 1,
-      maxWidthOrHeight: 1920, // Full HD for carousel
-      useWebWorker: true
+      maxSizeMB: 0.25, // Compress to ~250KB max
+      maxWidthOrHeight: 1280, // Reduced from 1920 to 1280 to save space
+      useWebWorker: true,
+      fileType: 'image/webp' // Ensures WebP output for better compression
     };
 
     try {
