@@ -255,6 +255,23 @@ export default function GalleryPack() {
     })
   );
 
+  const handleExportText = () => {
+    if (images.length === 0) {
+      alert('No hay imágenes para exportar.');
+      return;
+    }
+    const textContent = images.map(img => `${img.name || 'Sin nombre'} - ${img.site_url || 'Sin link'}`).join('\n');
+    const blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `enlaces_${pack?.name || 'pack'}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
   const handleDragEnd = async (event) => {
     const { active, over } = event;
     
@@ -296,11 +313,17 @@ export default function GalleryPack() {
 
   return (
     <div className="gallery-pack-view">
-      <div className="pack-header">
+      <div className="pack-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
           <Link to="/admin/gallery" className="back-link">← Volver a Packs</Link>
           <h1>Pack: {pack.name}</h1>
         </div>
+        <button 
+          onClick={handleExportText}
+          style={{ padding: '0.6rem 1.2rem', backgroundColor: '#3b82f6', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}
+        >
+          📄 Exportar enlaces
+        </button>
       </div>
 
       <div 
