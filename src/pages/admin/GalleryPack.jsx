@@ -260,7 +260,7 @@ export default function GalleryPack() {
       alert('No hay imágenes para exportar.');
       return;
     }
-    const textContent = images.map(img => `${img.name || 'Sin nombre'} - ${img.site_url || 'Sin link'}`).join('\n');
+    const textContent = images.map(img => `${img.name || 'Sin nombre'}\n\n${img.site_url || 'Sin link'}`).join('\n\n\n');
     const blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
