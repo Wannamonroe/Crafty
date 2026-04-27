@@ -70,14 +70,33 @@
   color: #d4af37;
   text-transform: uppercase;
   white-space: nowrap;
-  animation: pulseSlogan 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
-  margin: 0 16px;
+  animation: sloganLifecycle 25s infinite;
+  margin: 0 auto 0 40px;
 }
 
 @keyframes pulseSlogan {
   0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.15); }
   50% { box-shadow: 0 0 0 6px rgba(212, 175, 55, 0); }
   100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+}
+
+@keyframes sloganLifecycle {
+  0%, 20% { 
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.15);
+  }
+  10% {
+    box-shadow: 0 0 0 6px rgba(212, 175, 55, 0);
+  }
+  22%, 98% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .navbar__logo {
